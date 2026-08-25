@@ -185,14 +185,14 @@ main{
 
 
 /* =========================================
-   今日市場重點 - 精簡版
+   今日市場重點
 ========================================= */
 
 .daily-summary{
   background:linear-gradient(135deg,#ffffff,#fffdf2,#f8fff9);
   border:1px solid #f5df8b;
   border-radius:20px;
-  padding:18px;
+  padding:17px;
   box-shadow:0 7px 24px rgba(245,158,11,.07);
 }
 
@@ -202,7 +202,7 @@ main{
   align-items:center;
   gap:12px;
   flex-wrap:wrap;
-  padding-bottom:11px;
+  padding-bottom:10px;
   border-bottom:1px solid #f3ead0;
 }
 
@@ -221,7 +221,7 @@ main{
 }
 
 .daily-item{
-  padding:12px 2px;
+  padding:11px 2px;
   border-bottom:1px dashed #e8e3d5;
 }
 
@@ -238,28 +238,28 @@ main{
 .daily-description{
   margin-top:4px;
   font-size:13px;
-  line-height:1.7;
+  line-height:1.65;
   color:#475569;
 }
 
 .daily-sectors{
-  margin-top:6px;
+  margin-top:5px;
   color:#64748b;
   font-size:12px;
   line-height:1.7;
 }
 
 .daily-news{
-  margin-top:6px;
+  margin-top:5px;
   color:#94a3b8;
   font-size:11px;
   line-height:1.6;
 }
 
 .daily-more{
-  margin-top:9px;
+  margin-top:8px;
+  padding-top:9px;
   border-top:1px solid #f3ead0;
-  padding-top:10px;
 }
 
 .daily-more summary{
@@ -268,20 +268,15 @@ main{
   font-weight:900;
   font-size:13px;
   list-style:none;
-  user-select:none;
 }
 
 .daily-more summary::-webkit-details-marker{
   display:none;
 }
 
-.daily-hidden{
-  margin-top:4px;
-}
-
 
 /* =========================================
-   全球資產雷達
+   全球資產
 ========================================= */
 
 .market-panel{
@@ -354,14 +349,12 @@ main{
 
 .change-positive{
   color:#ef4444;
-  font-size:13px;
   font-weight:900;
   margin-top:5px;
 }
 
 .change-negative{
   color:#10b981;
-  font-size:13px;
   font-weight:900;
   margin-top:5px;
 }
@@ -575,21 +568,51 @@ main{
 
 
 /* =========================================
-   Trump Watch 卡片網格
+   Trump Watch
 ========================================= */
+
+.trump-section{
+  margin-top:31px;
+}
+
+.trump-header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+
+.trump-header-left{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.trump-days{
+  padding:5px 10px;
+  background:#fff3c4;
+  color:#946200;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:900;
+}
 
 .trump-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:15px;
 }
 
 .trump-post{
   background:white;
   border:1px solid #fde68a;
-  border-radius:19px;
-  padding:18px;
-  box-shadow:0 7px 25px rgba(245,158,11,.07);
+  border-radius:18px;
+  padding:17px;
+  box-shadow:0 7px 24px rgba(245,158,11,.08);
+  min-width:0;
 }
 
 .trump-author{
@@ -601,12 +624,12 @@ main{
 .trump-avatar{
   width:42px;
   height:42px;
+  flex:0 0 42px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   background:linear-gradient(135deg,#2563eb,#ef4444);
-  color:white;
   font-size:20px;
 }
 
@@ -620,14 +643,26 @@ main{
   margin-top:2px;
 }
 
+.trump-type{
+  display:inline-block;
+  margin-top:11px;
+  padding:5px 9px;
+  border-radius:18px;
+  background:#eff6ff;
+  color:#1d4ed8;
+  font-size:11px;
+  font-weight:800;
+}
+
 .trump-short{
-  margin-top:14px;
-  padding:13px 14px;
-  border-left:4px solid #fbbf24;
+  margin-top:11px;
   background:#fffbeb;
+  border-left:4px solid #fbbf24;
   border-radius:0 12px 12px 0;
+  padding:13px 14px;
   line-height:1.75;
   font-size:14px;
+  overflow-wrap:anywhere;
 }
 
 .trump-meta{
@@ -636,10 +671,20 @@ main{
   font-size:12px;
 }
 
+.trump-source{
+  display:inline-block;
+  margin-top:8px;
+  padding:5px 9px;
+  border-radius:18px;
+  background:#fff7ed;
+  color:#9a5b13;
+  font-size:11px;
+}
+
 .trump-details{
   margin-top:12px;
-  border-top:1px solid #f3e6b5;
   padding-top:10px;
+  border-top:1px solid #f3e6b5;
 }
 
 .trump-details summary{
@@ -648,7 +693,6 @@ main{
   font-weight:900;
   font-size:13px;
   list-style:none;
-  user-select:none;
 }
 
 .trump-details summary::-webkit-details-marker{
@@ -658,12 +702,13 @@ main{
 .trump-full{
   margin-top:12px;
   padding:14px;
-  border-radius:12px;
   background:#fffaf0;
+  border-radius:12px;
   color:#475569;
   line-height:1.85;
   font-size:14px;
-  white-space:pre-line;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
 }
 
 .trump-link{
@@ -675,25 +720,15 @@ main{
   font-size:13px;
 }
 
-.trump-source{
-  display:inline-block;
-  margin-top:10px;
-  padding:5px 9px;
-  border-radius:20px;
-  background:#fff7ed;
-  color:#9a5b13;
-  font-size:11px;
-}
-
 .trump-warning{
   margin-top:14px;
-  background:#fff7ed;
-  border:1px solid #fed7aa;
   padding:13px;
+  border:1px solid #fed7aa;
+  background:#fff7ed;
   border-radius:13px;
   color:#9a5b13;
-  line-height:1.7;
   font-size:12px;
+  line-height:1.7;
 }
 
 
@@ -755,10 +790,7 @@ footer{
     width:100%;
   }
 
-  .market-grid{
-    grid-template-columns:1fr;
-  }
-
+  .market-grid,
   .news-grid,
   .trump-grid{
     grid-template-columns:1fr;
@@ -773,10 +805,6 @@ footer{
 
 <body>
 
-
-<!-- =========================================
-     HEADER
-========================================= -->
 
 <header>
 
@@ -823,10 +851,6 @@ footer{
 </header>
 
 
-<!-- =========================================
-     NAV
-========================================= -->
-
 <nav>
 
 <div class="nav-inner">
@@ -855,10 +879,6 @@ footer{
 
 </nav>
 
-
-<!-- =========================================
-     MAIN
-========================================= -->
 
 <main>
 
@@ -972,12 +992,6 @@ TODAY
   class="market-grid"
   id="marketGrid"
 >
-
-<div class="loading">
-<span class="coin">🪙</span>
-正在取得市場資料...
-</div>
-
 </div>
 
 </div>
@@ -1019,6 +1033,7 @@ TODAY
   "
 >
 
+
 <button
   class="primary-btn"
   onclick="searchStock()"
@@ -1036,7 +1051,7 @@ TODAY
 
 
 <!-- =========================================
-     國際財經新聞
+     財經新聞
 ========================================= -->
 
 <h2
@@ -1060,12 +1075,6 @@ TODAY
   class="news-grid"
   id="newsGrid"
 >
-
-<div class="card loading">
-<span class="coin">🪙</span>
-正在取得國際財經新聞...
-</div>
-
 </div>
 
 
@@ -1073,19 +1082,34 @@ TODAY
      Trump Watch
 ========================================= -->
 
+<section class="trump-section">
+
+<div class="trump-header-row">
+
+<div class="trump-header-left">
+
 <h2
   class="section-title"
   id="trump"
+  style="margin:0;"
 >
-🇺🇸 Trump Watch｜最近 3 天
+🇺🇸 Trump Watch
 </h2>
+
+<span class="trump-days">
+最近 3 天
+</span>
+
+</div>
+
+</div>
 
 
 <div
   class="small"
   style="margin-bottom:12px;"
 >
-🗣️ Donald J. Trump 本人公開貼文
+🗣️ Donald J. Trump 本人公開貼文／轉貼
 </div>
 
 
@@ -1104,14 +1128,14 @@ TODAY
 
 <div class="trump-warning">
 
-⚠️ 此區優先使用 Truth Social 公開資料；若官方來源無法取得，可能使用公開第三方備援來源。媒體新聞不會被當成本人發文。
+⚠️ Truth Social 官方來源目前可能阻擋 Vercel，
+因此網站可能使用 Trump's Truth RSS 公開備援來源。
+部分內容可能是 Trump 的轉貼、連結分享或無文字貼文。
 
 </div>
 
+</section>
 
-<!-- =========================================
-     免責
-========================================= -->
 
 <div class="notice">
 
@@ -1152,7 +1176,6 @@ let language="zh";
 
 let currentMarketCategory="focus";
 
-
 let marketData={
   focus:[],
   taiwan:[],
@@ -1161,7 +1184,6 @@ let marketData={
   crypto:[]
 };
 
-
 let newsData={
   global:[],
   trumpPosts:[]
@@ -1169,14 +1191,12 @@ let newsData={
 
 
 /* =========================================
-   時間
+   TIME
 ========================================= */
 
 function updateTime(){
 
-  const now=
-    new Date();
-
+  const now=new Date();
 
   document
     .getElementById("updated")
@@ -1188,12 +1208,11 @@ function updateTime(){
 
 }
 
-
 updateTime();
 
 
 /* =========================================
-   語言切換
+   LANGUAGE
 ========================================= */
 
 function toggleLanguage(){
@@ -1235,7 +1254,7 @@ function toggleLanguage(){
 
 
 /* =========================================
-   導覽
+   NAV
 ========================================= */
 
 function goTo(id){
@@ -1250,7 +1269,7 @@ function goTo(id){
 
 
 /* =========================================
-   今日重點
+   今日市場重點
 ========================================= */
 
 function renderDailySummary(){
@@ -1258,27 +1277,16 @@ function renderDailySummary(){
   const box=
     document.getElementById("dailySummary");
 
-
   const allNews=
     newsData.global;
 
 
-  if(
-    allNews.length===0
-  ){
+  if(allNews.length===0){
 
     box.innerHTML=`
-
       <div class="small">
-
-        ${
-          language==="zh"
-          ?"目前尚無足夠新聞可整理今日市場重點。"
-          :"Not enough news to create today's market brief."
-        }
-
+        目前尚無足夠新聞可整理今日市場重點。
       </div>
-
     `;
 
     return;
@@ -1289,84 +1297,27 @@ function renderDailySummary(){
   const rules=[
 
     {
-
-      icon:"🇺🇸",
-
-      zh:"美國政策／關稅／貿易",
-
-      en:"U.S. Policy / Tariffs / Trade",
-
-      keywords:[
-        "tariff",
-        "trade",
-        "white house",
-        "關稅",
-        "貿易",
-        "白宮"
-      ],
-
-      zhDesc:
-        "關注美國關稅與貿易政策變化，可能牽動全球供應鏈與台灣出口產業。",
-
-      enDesc:
-        "Watch U.S. tariff and trade policy changes that may affect global supply chains.",
-
-      zhSectors:
-        "半導體、電子零組件、鋼鐵、航運、汽車",
-
-      enSectors:
-        "Semiconductors, Electronics, Steel, Shipping, Autos"
-
-    },
-
-
-    {
-
       icon:"🤖",
-
-      zh:"AI／半導體",
-
-      en:"AI / Semiconductors",
-
+      title:"AI／半導體",
       keywords:[
         "ai",
         "nvidia",
         "chip",
         "semiconductor",
         "tsmc",
-        "server",
-        "data center",
         "人工智慧",
         "晶片",
         "半導體",
-        "台積電",
-        "伺服器",
-        "資料中心"
+        "輝達",
+        "台積電"
       ],
-
-      zhDesc:
-        "AI 晶片、伺服器與資料中心需求仍是科技市場的重要觀察方向。",
-
-      enDesc:
-        "AI chips, servers and data-center demand remain important technology themes.",
-
-      zhSectors:
-        "半導體、IC設計、AI伺服器、網通、重電",
-
-      enSectors:
-        "Semiconductors, IC Design, AI Servers, Networking, Power"
-
+      desc:"AI 晶片、伺服器與資料中心需求仍是科技市場的重要觀察方向。",
+      sectors:"半導體、IC設計、AI伺服器、網通、重電"
     },
 
-
     {
-
       icon:"🏦",
-
-      zh:"Fed／利率／美元",
-
-      en:"Fed / Rates / Dollar",
-
+      title:"Fed／利率／美元",
       keywords:[
         "fed",
         "federal reserve",
@@ -1378,83 +1329,55 @@ function renderDailySummary(){
         "通膨",
         "美元"
       ],
-
-      zhDesc:
-        "利率與通膨預期可能影響美元、美債、金融股與科技股的資金流向。",
-
-      enDesc:
-        "Rates and inflation expectations may affect the dollar, bonds, financials and technology stocks.",
-
-      zhSectors:
-        "金融、科技、高股息、債券",
-
-      enSectors:
-        "Financials, Technology, High Dividend, Bonds"
-
+      desc:"利率與通膨預期可能影響美元、美債、金融股與科技股的資金流向。",
+      sectors:"金融、科技、高股息、債券"
     },
 
-
     {
-
       icon:"🥇",
-
-      zh:"黃金／避險",
-
-      en:"Gold / Safe Haven",
-
+      title:"黃金／避險",
       keywords:[
         "gold",
-        "bullion",
-        "safe haven",
         "黃金",
+        "safe haven",
         "避險"
       ],
-
-      zhDesc:
-        "黃金價格可能受到美元、利率、通膨及避險需求影響。",
-
-      enDesc:
-        "Gold may be affected by the dollar, rates, inflation and safe-haven demand.",
-
-      zhSectors:
-        "黃金、原物料、金融、美元資產",
-
-      enSectors:
-        "Gold, Materials, Financials, Dollar Assets"
-
+      desc:"黃金價格可能受到美元、利率、通膨及全球避險需求影響。",
+      sectors:"黃金、原物料、金融、美元資產"
     },
 
-
     {
-
       icon:"🛢️",
-
-      zh:"能源／原油",
-
-      en:"Energy / Oil",
-
+      title:"能源／原油",
       keywords:[
         "oil",
         "crude",
-        "opec",
         "energy",
         "原油",
         "油價",
         "能源"
       ],
+      desc:"油價與地緣政治可能影響通膨、運輸成本與能源相關產業。",
+      sectors:"能源、塑化、航運、航空"
+    },
 
-      zhDesc:
-        "油價與地緣政治可能影響通膨、運輸成本與能源相關產業。",
-
-      enDesc:
-        "Oil prices and geopolitical developments may affect inflation and transport costs.",
-
-      zhSectors:
-        "能源、塑化、航運、航空",
-
-      enSectors:
-        "Energy, Petrochemicals, Shipping, Airlines"
-
+    {
+      icon:"🌍",
+      title:"地緣政治／國際政策",
+      keywords:[
+        "iran",
+        "war",
+        "sanction",
+        "tariff",
+        "trade",
+        "伊朗",
+        "戰爭",
+        "制裁",
+        "關稅",
+        "貿易"
+      ],
+      desc:"地緣政治、制裁與貿易政策變化可能提高市場波動與避險需求。",
+      sectors:"航運、能源、黃金、半導體、出口產業"
     }
 
   ];
@@ -1466,13 +1389,11 @@ function renderDailySummary(){
       let score=0;
       let example=null;
 
-
       allNews.forEach(function(news){
 
         const text=
           String(news.title||"")
           .toLowerCase();
-
 
         const hit=
           rule.keywords.some(function(keyword){
@@ -1482,7 +1403,6 @@ function renderDailySummary(){
             );
 
           });
-
 
         if(hit){
 
@@ -1495,7 +1415,6 @@ function renderDailySummary(){
         }
 
       });
-
 
       return{
         ...rule,
@@ -1513,27 +1432,6 @@ function renderDailySummary(){
     .slice(0,5);
 
 
-  if(selected.length===0){
-
-    box.innerHTML=`
-
-      <div class="small">
-
-        ${
-          language==="zh"
-          ?"目前新聞尚未符合主要市場主題。"
-          :"Current news does not yet match the configured market themes."
-        }
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
   const numbers=[
     "①",
     "②",
@@ -1543,10 +1441,7 @@ function renderDailySummary(){
   ];
 
 
-  function renderItem(
-    item,
-    index
-  ){
+  function renderItem(item,index){
 
     return`
 
@@ -1556,54 +1451,29 @@ function renderDailySummary(){
 
           ${numbers[index]}
           ${item.icon}
-
-          ${
-            language==="zh"
-            ?escapeHTML(item.zh)
-            :escapeHTML(item.en)
-          }
+          ${escapeHTML(item.title)}
 
         </div>
-
 
         <div class="daily-description">
 
-          ${
-            language==="zh"
-            ?escapeHTML(item.zhDesc)
-            :escapeHTML(item.enDesc)
-          }
+          ${escapeHTML(item.desc)}
 
         </div>
-
 
         <div class="daily-sectors">
 
-          👀 ${
-            language==="zh"
-            ?"注意類股："
-            :"Watch sectors: "
-          }
-
-          ${
-            language==="zh"
-            ?escapeHTML(item.zhSectors)
-            :escapeHTML(item.enSectors)
-          }
+          👀 注意類股：
+          ${escapeHTML(item.sectors)}
 
         </div>
-
 
         ${
           item.example
           ?`
-
             <div class="daily-news">
-
               📰 ${escapeHTML(item.example.title)}
-
             </div>
-
           `
           :""
         }
@@ -1617,7 +1487,6 @@ function renderDailySummary(){
 
   const firstItems=
     selected.slice(0,2);
-
 
   const moreItems=
     selected.slice(2);
@@ -1636,40 +1505,27 @@ function renderDailySummary(){
     .join("");
 
 
-  if(
-    moreItems.length>0
-  ){
+  if(moreItems.length>0){
 
     html+=`
 
       <details class="daily-more">
 
         <summary>
-
-          ${
-            language==="zh"
-            ?"＋ 展開全部重點"
-            :"＋ Show all highlights"
-          }
-
+          ＋ 展開全部重點
         </summary>
 
+        ${moreItems
+          .map(function(item,index){
 
-        <div class="daily-hidden">
+            return renderItem(
+              item,
+              index+2
+            );
 
-          ${moreItems
-            .map(function(item,index){
-
-              return renderItem(
-                item,
-                index+2
-              );
-
-            })
-            .join("")
-          }
-
-        </div>
+          })
+          .join("")
+        }
 
       </details>
 
@@ -1728,24 +1584,20 @@ async function loadMarket(){
       ?json.focus
       :[];
 
-
     marketData.taiwan=
       Array.isArray(json.taiwan)
       ?json.taiwan
       :[];
-
 
     marketData.fx=
       Array.isArray(json.fx)
       ?json.fx
       :[];
 
-
     marketData.gold=
       Array.isArray(json.gold)
       ?json.gold
       :[];
-
 
     marketData.crypto=
       Array.isArray(json.crypto)
@@ -1757,10 +1609,7 @@ async function loadMarket(){
 
 
     status.textContent=
-
-      language==="zh"
-      ?"✅ 市場更新："+formatDateTime(json.updatedAt)
-      :"✅ Market updated: "+formatDateTime(json.updatedAt);
+      "✅ 市場更新："+formatDateTime(json.updatedAt);
 
 
   }catch(error){
@@ -1773,13 +1622,7 @@ async function loadMarket(){
       .innerHTML=`
 
         <div class="loading">
-
-          ⚠️ ${
-            language==="zh"
-            ?"市場資料暫時無法取得"
-            :"Market data unavailable"
-          }
-
+          ⚠️ 市場資料暫時無法取得
         </div>
 
       `;
@@ -1830,17 +1673,9 @@ function renderMarket(){
   if(items.length===0){
 
     grid.innerHTML=`
-
       <div class="loading">
-
-        ${
-          language==="zh"
-          ?"目前沒有市場資料"
-          :"No market data available"
-        }
-
+        目前沒有市場資料
       </div>
-
     `;
 
     return;
@@ -1865,12 +1700,10 @@ function renderMarket(){
         const change=
           Number(item.change);
 
-
         const cls=
           change>=0
           ?"change-positive"
           :"change-negative";
-
 
         const arrow=
           change>=0
@@ -1897,43 +1730,31 @@ function renderMarket(){
         <div class="market-card">
 
           <div class="market-icon">
-
             ${escapeHTML(item.icon||"💰")}
-
           </div>
 
           <div class="market-name">
-
             ${escapeHTML(
               language==="zh"
               ?item.zh
               :item.en
             )}
-
           </div>
 
           <div class="market-symbol">
-
             ${escapeHTML(item.symbol||"")}
-
           </div>
 
           <div class="market-value">
-
             ${formatMarketValue(item)}
-
           </div>
 
           ${
             item.unit
             ?`
-
               <div class="market-unit">
-
                 ${escapeHTML(item.unit)}
-
               </div>
-
             `
             :""
           }
@@ -1950,14 +1771,10 @@ function renderMarket(){
 
 
 /* =========================================
-   NEWS
+   NEWS API
 ========================================= */
 
 async function loadNews(){
-
-  const status=
-    document.getElementById("newsStatus");
-
 
   try{
 
@@ -2007,11 +1824,12 @@ async function loadNews(){
     renderTrumpPosts();
 
 
-    status.textContent=
+    document
+      .getElementById("newsStatus")
+      .textContent=
 
-      language==="zh"
-      ?"✅ 最近 3 天更新："+formatDateTime(json.updatedAt)
-      :"✅ Updated: "+formatDateTime(json.updatedAt);
+      "✅ 最近 3 天更新："+
+      formatDateTime(json.updatedAt);
 
 
   }catch(error){
@@ -2024,13 +1842,7 @@ async function loadNews(){
       .innerHTML=`
 
         <div class="card">
-
-          ⚠️ ${
-            language==="zh"
-            ?"新聞暫時無法取得"
-            :"Unable to load news"
-          }
-
+          ⚠️ 新聞暫時無法取得
         </div>
 
       `;
@@ -2041,13 +1853,7 @@ async function loadNews(){
       .innerHTML=`
 
         <div class="card">
-
-          ⚠️ ${
-            language==="zh"
-            ?"Trump 本人發文目前無法取得"
-            :"Trump posts unavailable"
-          }
-
+          ⚠️ Trump 貼文目前無法取得
         </div>
 
       `;
@@ -2072,13 +1878,7 @@ function renderGlobalNews(){
     grid.innerHTML=`
 
       <div class="card">
-
-        ${
-          language==="zh"
-          ?"最近 3 天目前沒有取得財經新聞"
-          :"No financial news was retrieved for the last 3 days"
-        }
-
+        最近 3 天目前沒有取得財經新聞
       </div>
 
     `;
@@ -2103,23 +1903,15 @@ function renderGlobalNews(){
         <div class="card news-card">
 
           <span class="tag">
-
-            🌍
-            ${escapeHTML(item.source||"News")}
-
+            🌍 ${escapeHTML(item.source||"News")}
           </span>
 
           <div class="news-title">
-
             ${escapeHTML(item.title)}
-
           </div>
 
           <div class="news-date">
-
-            🕒
-            ${formatDateTime(item.publishedAt)}
-
+            🕒 ${formatDateTime(item.publishedAt)}
           </div>
 
           ${
@@ -2132,13 +1924,7 @@ function renderGlobalNews(){
                 target="_blank"
                 rel="noopener noreferrer"
               >
-
-                ${
-                  language==="zh"
-                  ?"查看原文 →"
-                  :"Read original →"
-                }
-
+                查看原文 →
               </a>
 
             `
@@ -2155,8 +1941,86 @@ function renderGlobalNews(){
 
 
 /* =========================================
-   Trump Watch
+   Trump
 ========================================= */
+
+function cleanTrumpText(value){
+
+  let text=
+    String(value||"")
+    .trim();
+
+
+  if(
+    text==="[No Title]" ||
+    text==="No Title"
+  ){
+
+    return "";
+
+  }
+
+
+  /*
+    修正常見 RSS 把網址切開的問題
+  */
+
+  text=
+    text
+    .replace(
+      /https:\/\/\s+/gi,
+      "https://"
+    )
+    .replace(
+      /http:\/\/\s+/gi,
+      "http://"
+    );
+
+
+  return text;
+
+}
+
+
+function getTrumpType(text){
+
+  const lower=
+    String(text||"")
+    .toLowerCase();
+
+
+  if(
+    lower.startsWith("rt:")
+  ){
+
+    return "🔁 轉貼";
+
+  }
+
+
+  if(
+    lower.startsWith("rt @")
+  ){
+
+    return "🔁 轉貼";
+
+  }
+
+
+  if(
+    lower.includes("http") &&
+    lower.length<180
+  ){
+
+    return "🔗 分享連結";
+
+  }
+
+
+  return "🗣️ 本人發文";
+
+}
+
 
 function renderTrumpPosts(){
 
@@ -2164,17 +2028,55 @@ function renderTrumpPosts(){
     document.getElementById("trumpPosts");
 
 
-  if(newsData.trumpPosts.length===0){
+  const posts=
+    Array.isArray(newsData.trumpPosts)
+    ?newsData.trumpPosts
+    :[];
+
+
+  const cleanedPosts=
+    posts
+    .map(function(item){
+
+      const raw=
+        cleanTrumpText(
+
+          item.fullText ||
+          item.excerpt ||
+          item.description ||
+          item.content ||
+          item.title ||
+          ""
+
+        );
+
+
+      return{
+        ...item,
+        cleanText:raw
+      };
+
+    })
+    .filter(function(item){
+
+      /*
+        把完全沒有內容的 [No Title] 卡片移掉
+      */
+
+      return Boolean(
+        item.cleanText
+      );
+
+    });
+
+
+  if(cleanedPosts.length===0){
 
     box.innerHTML=`
 
       <div class="card">
 
-        🕵️ ${
-          language==="zh"
-          ?"最近 3 天暫未取得可辨識的 Trump 本人公開貼文。"
-          :"No identifiable Trump posts were retrieved in the last 3 days."
-        }
+        🕵️ 最近 3 天暫未取得可顯示的 Trump 貼文。
 
       </div>
 
@@ -2187,39 +2089,59 @@ function renderTrumpPosts(){
 
   box.innerHTML=
 
-    newsData.trumpPosts
+    cleanedPosts
     .slice(0,9)
     .map(function(item){
 
 
       const raw=
-        String(
-          item.fullText||
-          item.excerpt||
-          ""
-        );
+        item.cleanText;
 
 
       const short=
-        raw.length>140
-        ?raw.slice(0,140)+"..."
+        raw.length>145
+        ?raw.slice(0,145)+"..."
         :raw;
 
 
       const link=
-        safeURL(item.link);
+        safeURL(
+          item.link ||
+          item.url ||
+          ""
+        );
+
+
+      const type=
+        getTrumpType(raw);
 
 
       const source=
         String(
-          item.dataSource||
+          item.dataSource ||
           ""
         );
+
+
+      const sourceLabel=
+        source.toLowerCase().includes("rss")
+        ?"公開備援來源"
+        :"Truth Social 官方來源";
+
+
+      /*
+        如果只是 RT + URL，
+        不需要再顯示相同的完整文字
+      */
+
+      const isOnlyLink=
+        /^RT:\s*https?:\/\//i.test(raw);
 
 
       return`
 
         <article class="trump-post">
+
 
           <div class="trump-author">
 
@@ -2230,11 +2152,11 @@ function renderTrumpPosts(){
             <div>
 
               <div class="trump-name">
-                Donald J. Trump ✓
+                Donald J. Trump
               </div>
 
               <div class="trump-platform">
-                📍 ${escapeHTML(item.platform||"Truth Social")}
+                📍 Truth Social
               </div>
 
             </div>
@@ -2242,109 +2164,99 @@ function renderTrumpPosts(){
           </div>
 
 
+          <div class="trump-type">
+            ${type}
+          </div>
+
+
           <div class="trump-short">
 
-            “${escapeHTML(short)}”
+            ${
+              isOnlyLink
+              ?"Trump 轉貼了一則 Truth Social 貼文。"
+              :`“${escapeHTML(short)}”`
+            }
 
           </div>
 
 
           <div class="trump-meta">
 
-            🕒
-            ${formatDateTime(item.publishedAt)}
+            🕒 ${formatDateTime(
+              item.publishedAt
+            )}
+
+          </div>
+
+
+          <div class="trump-source">
+
+            ${sourceLabel}
 
           </div>
 
 
           ${
-            source
+            raw.length>145 &&
+            !isOnlyLink
             ?`
 
-              <div class="trump-source">
+              <details class="trump-details">
 
-                ${
-                  source.includes("RSS")
-                  ?"備援來源"
-                  :"官方來源"
-                }
+                <summary>
+                  ＋ 展開完整貼文
+                </summary>
 
-              </div>
+                <div class="trump-full">
+                  ${escapeHTML(raw)}
+                </div>
+
+              </details>
 
             `
             :""
           }
 
 
-          <details class="trump-details">
+          ${
+            link
+            ?`
 
-            <summary>
+              <a
+                class="trump-link"
+                href="${link}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                查看貼文 →
+              </a>
 
-              ${
-                language==="zh"
-                ?"＋ 展開完整貼文"
-                :"＋ Expand full post"
-              }
+            `
+            :""
+          }
 
-            </summary>
-
-
-            <div class="trump-full">
-
-              ${escapeHTML(raw)}
-
-            </div>
-
-
-            ${
-              link
-              ?`
-
-                <a
-                  class="trump-link"
-                  href="${link}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-
-                  ${
-                    language==="zh"
-                    ?"查看原始貼文 →"
-                    :"View original post →"
-                  }
-
-                </a>
-
-              `
-              :""
-            }
-
-          </details>
 
         </article>
 
       `;
 
-    }).join("");
+    })
+    .join("");
 
 }
 
 
 /* =========================================
-   股票產業規則
+   股票產業
 ========================================= */
 
-function getIndustryImpact(
-  industry
-){
+function getIndustryImpact(industry){
 
   const text=
     String(industry||"");
 
 
-  if(
-    text.includes("半導體")
-  ){
+  if(text.includes("半導體")){
 
     return{
 
@@ -2355,14 +2267,12 @@ function getIndustryImpact(
         "semiconductor",
         "tsmc",
         "server",
-        "data center",
         "tariff",
         "人工智慧",
         "晶片",
         "半導體",
         "台積電",
-        "伺服器",
-        "資料中心",
+        "輝達",
         "關稅"
       ],
 
@@ -2386,7 +2296,7 @@ function getIndustryImpact(
 
 
   if(
-    text.includes("金融")||
+    text.includes("金融") ||
     text.includes("保險")
   ){
 
@@ -2424,9 +2334,7 @@ function getIndustryImpact(
   }
 
 
-  if(
-    text.includes("航運")
-  ){
+  if(text.includes("航運")){
 
     return{
 
@@ -2462,8 +2370,8 @@ function getIndustryImpact(
 
 
   if(
-    text.includes("生技")||
-    text.includes("醫療")||
+    text.includes("生技") ||
+    text.includes("醫療") ||
     text.includes("藥")
   ){
 
@@ -2532,7 +2440,7 @@ function getIndustryImpact(
 
 
 /* =========================================
-   股票相關新聞
+   相關新聞
 ========================================= */
 
 function findRelatedNews(
@@ -2613,26 +2521,11 @@ function findRelatedNews(
     item=>item.relevanceScore>0
   )
 
-  .sort(function(a,b){
-
-    if(
-      b.relevanceScore!==a.relevanceScore
-    ){
-
-      return(
-        b.relevanceScore-
-        a.relevanceScore
-      );
-
-    }
-
-
-    return(
-      Number(b.timestamp||0)-
-      Number(a.timestamp||0)
-    );
-
-  })
+  .sort(
+    (a,b)=>
+      b.relevanceScore-
+      a.relevanceScore
+  )
 
   .slice(0,5);
 
@@ -2642,7 +2535,6 @@ function findRelatedNews(
 function detectDirection(text){
 
   const positive=[
-
     "growth",
     "rise",
     "surge",
@@ -2655,12 +2547,10 @@ function detectDirection(text){
     "需求",
     "投資",
     "創高"
-
   ];
 
 
   const negative=[
-
     "tariff",
     "ban",
     "restriction",
@@ -2675,7 +2565,6 @@ function detectDirection(text){
     "風險",
     "戰爭",
     "制裁"
-
   ];
 
 
@@ -2727,9 +2616,7 @@ async function searchStock(){
   if(!keyword){
 
     alert(
-      language==="zh"
-      ?"請輸入股票代號或公司名稱"
-      :"Please enter a stock code or company name"
+      "請輸入股票代號或公司名稱"
     );
 
     return;
@@ -2744,15 +2631,7 @@ async function searchStock(){
   result.innerHTML=`
 
     <div class="loading">
-
-      <span class="coin">🪙</span>
-
-      ${
-        language==="zh"
-        ?"正在分析股票..."
-        :"Analyzing stock..."
-      }
-
+      🪙 正在分析股票...
     </div>
 
   `;
@@ -2767,35 +2646,20 @@ async function searchStock(){
       );
 
 
-    if(!response.ok){
-
-      throw new Error(
-        "HTTP "+response.status
-      );
-
-    }
-
-
     const json=
       await response.json();
 
 
     if(
-      !json.success||
-      !Array.isArray(json.data)||
+      !json.success ||
+      !Array.isArray(json.data) ||
       json.data.length===0
     ){
 
       result.innerHTML=`
 
         <div class="result-card">
-
-          😢 ${
-            language==="zh"
-            ?"找不到這檔股票"
-            :"Stock not found"
-          }
-
+          😢 找不到這檔股票
         </div>
 
       `;
@@ -2827,13 +2691,16 @@ async function searchStock(){
 
     if(!stock){
 
-      stock=json.data[0];
+      stock=
+        json.data[0];
 
     }
 
 
     const impact=
-      getIndustryImpact(stock.industry);
+      getIndustryImpact(
+        stock.industry
+      );
 
 
     const relatedNews=
@@ -2896,7 +2763,9 @@ async function searchStock(){
 
 
         <div class="status">
+
           ✅ 股票資料取得成功
+
         </div>
 
 
@@ -2914,9 +2783,7 @@ async function searchStock(){
               return`
 
                 <div class="impact-box">
-
                   ${escapeHTML(topic)}
-
                 </div>
 
               `;
@@ -2942,9 +2809,7 @@ async function searchStock(){
               return`
 
                 <div class="sector">
-
                   ${escapeHTML(sector)}
-
                 </div>
 
               `;
@@ -2971,13 +2836,7 @@ async function searchStock(){
     result.innerHTML=`
 
       <div class="result-card">
-
-        ⚠️ ${
-          language==="zh"
-          ?"股票分析暫時無法取得"
-          :"Unable to analyze stock"
-        }
-
+        ⚠️ 股票分析暫時無法取得
       </div>
 
     `;
@@ -2988,13 +2847,13 @@ async function searchStock(){
 
 
 /* =========================================
-   股票相關新聞顯示
+   股票相關新聞
 ========================================= */
 
 function renderRelatedNews(items){
 
   if(
-    !Array.isArray(items)||
+    !Array.isArray(items) ||
     items.length===0
   ){
 
@@ -3035,14 +2894,11 @@ function renderRelatedNews(items){
         let direction=
           "🟡 需觀察";
 
-
         let cls=
           "watch";
 
 
-        if(
-          item.direction==="positive"
-        ){
+        if(item.direction==="positive"){
 
           direction=
             "🟢 潛在正向";
@@ -3053,9 +2909,7 @@ function renderRelatedNews(items){
         }
 
 
-        if(
-          item.direction==="negative"
-        ){
+        if(item.direction==="negative"){
 
           direction=
             "🔴 潛在負向";
@@ -3126,9 +2980,7 @@ function renderRelatedNews(items){
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-
                   查看原文 →
-
                 </a>
 
               `
@@ -3155,14 +3007,12 @@ function renderRelatedNews(items){
 function formatMarketValue(item){
 
   if(
-    item.value===null||
-    item.value===undefined||
+    item.value===null ||
+    item.value===undefined ||
     Number.isNaN(Number(item.value))
   ){
 
-    return language==="zh"
-    ?"暫無資料"
-    :"N/A";
+    return "暫無資料";
 
   }
 
@@ -3178,7 +3028,7 @@ function formatMarketValue(item){
 
 
   if(
-    item.id==="bitcoin"||
+    item.id==="bitcoin" ||
     item.id==="bitcoin-usd"
   ){
 
@@ -3193,9 +3043,7 @@ function formatMarketValue(item){
   }
 
 
-  if(
-    item.id==="bitcoin-twd"
-  ){
+  if(item.id==="bitcoin-twd"){
 
     return "NT$ "+
       value.toLocaleString(
@@ -3208,9 +3056,7 @@ function formatMarketValue(item){
   }
 
 
-  if(
-    item.id==="gold"
-  ){
+  if(item.id==="gold"){
 
     return "$"+
       value.toLocaleString(
@@ -3224,9 +3070,7 @@ function formatMarketValue(item){
   }
 
 
-  if(
-    item.id==="gold-twd-gram"
-  ){
+  if(item.id==="gold-twd-gram"){
 
     return "NT$ "+
       value.toLocaleString(
@@ -3240,9 +3084,7 @@ function formatMarketValue(item){
 
 
   return value.toLocaleString(
-    language==="zh"
-    ?"zh-TW"
-    :"en-US",
+    "zh-TW",
     {
       minimumFractionDigits:decimals,
       maximumFractionDigits:decimals
@@ -3276,15 +3118,15 @@ function formatDateTime(value){
   }
 
 
-  return language==="zh"
-  ?date.toLocaleString("zh-TW")
-  :date.toLocaleString("en-US");
+  return date.toLocaleString(
+    "zh-TW"
+  );
 
 }
 
 
 /* =========================================
-   URL 安全
+   URL
 ========================================= */
 
 function safeURL(value){
@@ -3296,11 +3138,13 @@ function safeURL(value){
 
 
     if(
-      url.protocol==="http:"||
+      url.protocol==="http:" ||
       url.protocol==="https:"
     ){
 
-      return escapeHTML(url.href);
+      return escapeHTML(
+        url.href
+      );
 
     }
 
@@ -3313,7 +3157,7 @@ function safeURL(value){
 
 
 /* =========================================
-   HTML 安全
+   HTML
 ========================================= */
 
 function escapeHTML(value){
