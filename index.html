@@ -42,6 +42,110 @@ body{
 
 
 /* =========================================
+   進站免責聲明
+========================================= */
+
+.disclaimer-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(15,23,42,.72);
+  backdrop-filter:blur(8px);
+}
+
+.disclaimer-overlay.hidden{
+  display:none;
+}
+
+.disclaimer-modal{
+  width:min(570px,100%);
+  max-height:88vh;
+  overflow:auto;
+  background:white;
+  border-radius:24px;
+  padding:25px;
+  border:1px solid #e2e8f0;
+  box-shadow:0 25px 80px rgba(0,0,0,.28);
+}
+
+.disclaimer-icon{
+  text-align:center;
+  font-size:44px;
+  margin-bottom:8px;
+}
+
+.disclaimer-title{
+  text-align:center;
+  font-size:23px;
+  font-weight:900;
+  color:#1e293b;
+}
+
+.disclaimer-subtitle{
+  text-align:center;
+  margin-top:5px;
+  color:#64748b;
+  font-size:13px;
+}
+
+.disclaimer-text{
+  margin-top:18px;
+  padding:17px;
+  border-radius:15px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#9a5b13;
+  font-size:14px;
+  line-height:1.9;
+}
+
+.disclaimer-check{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  margin-top:17px;
+  color:#475569;
+  font-size:13px;
+  line-height:1.7;
+  cursor:pointer;
+}
+
+.disclaimer-check input{
+  margin-top:4px;
+  transform:scale(1.1);
+}
+
+.disclaimer-btn{
+  width:100%;
+  margin-top:18px;
+  border:0;
+  border-radius:14px;
+  padding:14px 18px;
+  background:linear-gradient(135deg,#2563eb,#38bdf8);
+  color:white;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.disclaimer-btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+.disclaimer-mini{
+  margin-top:11px;
+  text-align:center;
+  color:#94a3b8;
+  font-size:11px;
+}
+
+
+/* =========================================
    HEADER
 ========================================= */
 
@@ -506,7 +610,7 @@ main{
 
 
 /* =========================================
-   國際新聞
+   NEWS
 ========================================= */
 
 .news-grid{
@@ -569,7 +673,7 @@ main{
 
 
 /* =========================================
-   Trump Watch
+   TRUMP
 ========================================= */
 
 .trump-section{
@@ -789,6 +893,10 @@ footer{
     grid-template-columns:1fr;
   }
 
+  .disclaimer-modal{
+    padding:20px;
+  }
+
 }
 
 </style>
@@ -799,6 +907,109 @@ footer{
 <body>
 
 
+<!-- =========================================
+     進站免責聲明
+========================================= -->
+
+<div
+  class="disclaimer-overlay"
+  id="disclaimerOverlay"
+>
+
+<div class="disclaimer-modal">
+
+<div class="disclaimer-icon">
+⚠️💰
+</div>
+
+<div class="disclaimer-title">
+使用前請先閱讀
+</div>
+
+<div class="disclaimer-subtitle">
+國際財經情報站｜資訊與投資風險提醒
+</div>
+
+
+<div class="disclaimer-text">
+
+<strong>
+投資與資料免責聲明
+</strong>
+
+<br><br>
+
+本網站提供的市場價格、匯率、新聞、社群貼文、
+股票相關新聞、產業分類、注意類股與市場影響分析，
+僅供資訊整理、學習、研究與市場觀察使用。
+
+<br><br>
+
+市場資料可能存在延遲、錯誤、資料來源中斷，
+或第三方服務暫時無法取得等情況。
+
+<br><br>
+
+網站中的「潛在正向」、「潛在負向」、「注意類股」、
+「可能影響主題」、「相關新聞」等內容，
+主要依資料來源、關鍵字及規則式方式自動整理，
+不代表實際投資評等，也不代表未來價格走勢。
+
+<br><br>
+
+本網站內容
+<strong>
+不構成任何投資建議、買賣推薦、獲利保證、
+財務顧問意見或投資招攬。
+</strong>
+
+<br><br>
+
+投資具有風險，使用者應自行查證資料、
+評估投資風險，並自行負責最終投資決策。
+
+</div>
+
+
+<label class="disclaimer-check">
+
+<input
+  type="checkbox"
+  id="disclaimerAgree"
+  onchange="updateDisclaimerButton()"
+>
+
+<span>
+我已閱讀並了解以上說明，
+並知道本網站內容僅供資訊、學習與研究使用。
+</span>
+
+</label>
+
+
+<button
+  class="disclaimer-btn"
+  id="disclaimerButton"
+  onclick="acceptDisclaimer()"
+  disabled
+>
+我了解並進入網站 →
+</button>
+
+
+<div class="disclaimer-mini">
+本網站不提供下單、代操或投資獲利保證。
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
 <header>
 
 <div class="header-inner">
@@ -807,18 +1018,11 @@ footer{
 
 <div>
 
-<h1
-  data-zh="🌍💰 國際財經情報站"
-  data-en="🌍💰 Global Finance Intelligence"
->
+<h1>
 🌍💰 國際財經情報站
 </h1>
 
-<div
-  class="subtitle"
-  data-zh="今日重點 × 全球資產 × 台股分析 × 國際新聞 × Trump Watch"
-  data-en="Daily Brief × Global Assets × Taiwan Stocks × Global News × Trump Watch"
->
+<div class="subtitle">
 今日重點 × 全球資產 × 台股分析 × 國際新聞 × Trump Watch
 </div>
 
@@ -843,6 +1047,10 @@ footer{
 
 </header>
 
+
+<!-- =========================================
+     NAV
+========================================= -->
 
 <nav>
 
@@ -901,6 +1109,7 @@ TODAY
 </div>
 
 </div>
+
 
 <div id="dailySummary">
 
@@ -1039,7 +1248,7 @@ TODAY
 
 
 <!-- =========================================
-     國際新聞
+     財經新聞
 ========================================= -->
 
 <h2
@@ -1112,7 +1321,8 @@ TODAY
 
 <div class="trump-warning">
 
-⚠️ Truth Social 官方來源若無法由 Vercel 取得，網站會使用公開備援來源。
+⚠️ Truth Social 官方來源若無法由 Vercel 取得，
+網站可能使用公開備援來源。
 部分內容可能屬於 Trump 的轉貼、外部文章分享或連結貼文。
 
 </div>
@@ -1121,7 +1331,7 @@ TODAY
 
 
 <!-- =========================================
-     免責
+     頁面免責
 ========================================= -->
 
 <div class="notice">
@@ -1156,6 +1366,82 @@ TODAY
 <script>
 
 /* =========================================
+   免責聲明
+========================================= */
+
+function updateDisclaimerButton(){
+
+  const checkbox=
+    document.getElementById(
+      "disclaimerAgree"
+    );
+
+  const button=
+    document.getElementById(
+      "disclaimerButton"
+    );
+
+
+  button.disabled=
+    !checkbox.checked;
+
+}
+
+
+function acceptDisclaimer(){
+
+  try{
+
+    localStorage.setItem(
+      "financeDisclaimerAccepted",
+      "yes"
+    );
+
+  }catch(error){}
+
+
+  document
+    .getElementById(
+      "disclaimerOverlay"
+    )
+    .classList
+    .add("hidden");
+
+}
+
+
+function checkDisclaimer(){
+
+  let accepted=null;
+
+
+  try{
+
+    accepted=
+      localStorage.getItem(
+        "financeDisclaimerAccepted"
+      );
+
+  }catch(error){}
+
+
+  if(
+    accepted==="yes"
+  ){
+
+    document
+      .getElementById(
+        "disclaimerOverlay"
+      )
+      .classList
+      .add("hidden");
+
+  }
+
+}
+
+
+/* =========================================
    全域
 ========================================= */
 
@@ -1188,9 +1474,7 @@ function updateTime(){
   document
     .getElementById("updated")
     .textContent=
-      language==="zh"
-      ?"🕒 網頁時間："+now.toLocaleString("zh-TW")
-      :"🕒 Page time: "+now.toLocaleString("en-US");
+      "🕒 網頁時間："+now.toLocaleString("zh-TW");
 
 }
 
@@ -1207,18 +1491,6 @@ function toggleLanguage(){
     language==="zh"
     ?"en"
     :"zh";
-
-
-  document
-    .querySelectorAll("[data-zh]")
-    .forEach(function(el){
-
-      el.textContent=
-        language==="zh"
-        ?el.dataset.zh
-        :el.dataset.en;
-
-    });
 
 
   updateTime();
@@ -1437,10 +1709,8 @@ function renderDailySummary(){
         </div>
 
         <div class="daily-sectors">
-
           👀 注意類股：
           ${escapeHTML(item.sectors)}
-
         </div>
 
         ${
@@ -1470,7 +1740,10 @@ function renderDailySummary(){
   let html=
     firstItems.map(function(item,index){
 
-      return renderItem(item,index);
+      return renderItem(
+        item,
+        index
+      );
 
     }).join("");
 
@@ -1507,7 +1780,7 @@ function renderDailySummary(){
 
 
 /* =========================================
-   MARKET API
+   MARKET
 ========================================= */
 
 async function loadMarket(){
@@ -1601,7 +1874,10 @@ async function loadMarket(){
 }
 
 
-function switchMarket(category,button){
+function switchMarket(
+  category,
+  button
+){
 
   currentMarketCategory=
     category;
@@ -1639,9 +1915,11 @@ function renderMarket(){
   if(items.length===0){
 
     grid.innerHTML=`
+
       <div class="loading">
         目前沒有市場資料
       </div>
+
     `;
 
     return;
@@ -1679,10 +1957,8 @@ function renderMarket(){
         changeHTML=`
 
           <div class="${cls}">
-
             ${arrow}
             ${Math.abs(change).toFixed(2)}%
-
           </div>
 
         `;
@@ -1982,12 +2258,14 @@ function renderTrumpPosts(){
 
       const raw=
         cleanTrumpText(
+
           item.fullText ||
           item.excerpt ||
           item.description ||
           item.content ||
           item.title ||
           ""
+
         );
 
 
@@ -2011,9 +2289,7 @@ function renderTrumpPosts(){
     box.innerHTML=`
 
       <div class="card">
-
         🕵️ 最近 3 天暫未取得可顯示的 Trump 貼文。
-
       </div>
 
     `;
@@ -2053,7 +2329,7 @@ function renderTrumpPosts(){
 
       const source=
         String(
-          item.dataSource ||
+          item.dataSource||
           ""
         );
 
@@ -2119,13 +2395,16 @@ function renderTrumpPosts(){
 
 
           <div class="trump-source">
+
             ${sourceLabel}
+
           </div>
 
 
           ${
             raw.length>145 &&
             !isOnlyRTLink
+
             ?`
 
               <details class="trump-details">
@@ -2141,6 +2420,7 @@ function renderTrumpPosts(){
               </details>
 
             `
+
             :""
           }
 
@@ -2536,7 +2816,7 @@ function detectDirection(text){
 
 
 /* =========================================
-   股票搜尋 - 容錯完整版
+   股票搜尋
 ========================================= */
 
 async function searchStock(){
@@ -2585,7 +2865,6 @@ async function searchStock(){
 
   try{
 
-
     const response=
       await fetch(
         "/api/stocks?q="+
@@ -2606,58 +2885,36 @@ async function searchStock(){
       await response.json();
 
 
-    console.log(
-      "股票 API 回傳：",
-      json
-    );
-
-
-    /*
-      相容多種 API 格式
-    */
-
     let stocks=[];
 
 
-    if(
-      Array.isArray(json.data)
-    ){
+    if(Array.isArray(json.data)){
 
       stocks=
         json.data;
 
     }
 
-
-    else if(
-      Array.isArray(json.results)
-    ){
+    else if(Array.isArray(json.results)){
 
       stocks=
         json.results;
 
     }
 
-
-    else if(
-      Array.isArray(json.stocks)
-    ){
+    else if(Array.isArray(json.stocks)){
 
       stocks=
         json.stocks;
 
     }
 
-
-    else if(
-      Array.isArray(json)
-    ){
+    else if(Array.isArray(json)){
 
       stocks=
         json;
 
     }
-
 
     else if(
       json.data &&
@@ -2698,16 +2955,10 @@ async function searchStock(){
     }
 
 
-    /*
-      欄位標準化
-    */
-
     const normalized=
       stocks.map(function(item){
 
         return{
-
-          original:item,
 
           code:
             item.code ||
@@ -2754,10 +3005,6 @@ async function searchStock(){
       });
 
 
-    /*
-      精準比對
-    */
-
     let stock=
       normalized.find(function(item){
 
@@ -2777,10 +3024,6 @@ async function searchStock(){
 
       });
 
-
-    /*
-      部分名稱比對
-    */
 
     if(!stock){
 
@@ -2803,10 +3046,6 @@ async function searchStock(){
 
     }
 
-
-    /*
-      最後 fallback 第一筆
-    */
 
     if(!stock){
 
@@ -2851,7 +3090,6 @@ async function searchStock(){
             ${
               stock.fullName &&
               stock.fullName!==stock.name
-
               ?`
 
                 <div class="small">
@@ -2896,7 +3134,7 @@ async function searchStock(){
           </strong>
 
           ${escapeHTML(
-            stock.industry ||
+            stock.industry||
             "其他"
           )}
 
@@ -3108,7 +3346,7 @@ function renderRelatedNews(items){
 
                 📰
                 ${escapeHTML(
-                  item.source ||
+                  item.source||
                   "News"
                 )}
 
@@ -3356,6 +3594,8 @@ function escapeHTML(value){
 /* =========================================
    START
 ========================================= */
+
+checkDisclaimer();
 
 Promise.allSettled([
 
