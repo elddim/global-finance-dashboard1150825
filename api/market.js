@@ -2,125 +2,135 @@
   🌍💰 國際財經情報站
   api/market.js
 
-  免費資料來源：
-  1. Frankfurter：匯率
-  2. Gold API：黃金
-  3. CoinGecko：Bitcoin
+  功能：
+  💵 USD / TWD
+  🇯🇵 JPY / TWD
+  🇪🇺 EUR / TWD
+  🥇 Gold / USD
+  ✨ Gold / TWD / gram
+  ₿ Bitcoin / USD
 
-  不需要付費 API Key
+  免費資料來源：
+  Frankfurter
+  Gold API
+  CoinGecko
 */
 
 
-/* =========================
-   安全抓 JSON
-========================= */
+/* ========================================
+   共用：安全抓取 JSON
+======================================== */
 
 async function fetchJSON(url, options = {}) {
 
   const response = await fetch(url, {
     ...options,
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "User-Agent": "GlobalFinanceDashboard/1.0",
       ...(options.headers || {})
     }
   });
 
   if (!response.ok) {
+
     throw new Error(
       `${url} HTTP ${response.status}`
     );
+
   }
 
   return await response.json();
+
 }
 
 
-/* =========================
-   匯率
-========================= */
+/* ========================================
+   💱 匯率
+======================================== */
 
 async function getExchangeRates() {
 
   /*
-    以 TWD 為基準比較直覺
+    Frankfurter v2
 
-    API 回傳：
-    1 TWD = ? USD
-    1 TWD = ? JPY
-    1 TWD = ? EUR
+    直接取得：
 
-    但網站想顯示：
+    USD → TWD
+    JPY → TWD
+    EUR → TWD
 
-    1 USD = ? TWD
-    1 JPY = ? TWD
-    1 EUR = ? TWD
-
-    所以需要倒數。
+    不需要再自己算倒數。
   */
 
-  const data = await fetchJSON(
-    "https://api.frankfurter.dev/v1/latest?base=TWD&symbols=USD,JPY,EUR"
-  );
+  const results = await Promise.all([
 
-  const usd = data.rates?.USD;
-  const jpy = data.rates?.JPY;
-  const eur = data.rates?.EUR;
+    fetchJSON(
+      "https://api.frankfurter.dev/v2/rate/USD/TWD"
+    ),
+
+    fetchJSON(
+      "https://api.frankfurter.dev/v2/rate/JPY/TWD"
+    ),
+
+    fetchJSON(
+      "https://api.frankfurter.dev/v2/rate/EUR/TWD"
+    )
+
+  ]);
+
+
+  const usd = results[0];
+  const jpy = results[1];
+  const eur = results[2];
+
 
   return {
 
     date:
-      data.date || "",
+      usd.date ||
+      jpy.date ||
+      eur.date ||
+      "",
+
 
     usdTwd:
-      usd
-        ? 1 / usd
-        : null,
+      Number(usd.rate) || null,
+
 
     jpyTwd:
-      jpy
-        ? 1 / jpy
-        : null,
+      Number(jpy.rate) || null,
+
 
     eurTwd:
-      eur
-        ? 1 / eur
-        : null
+      Number(eur.rate) || null
 
   };
+
 }
 
 
-/* =========================
-   黃金
-========================= */
+/* ========================================
+   🥇 黃金
+======================================== */
 
 async function getGold() {
-
-  /*
-    XAU = Gold
-
-    即時價格通常以：
-    美元 / 金衡盎司
-    USD per troy ounce
-  */
 
   const data = await fetchJSON(
     "https://api.gold-api.com/price/XAU"
   );
 
 
-  const price =
-    Number(
-      data.price ||
-      data.price_usd ||
-      0
-    );
+  const price = Number(
+    data.price ||
+    data.price_usd ||
+    0
+  );
 
 
   /*
-    1 troy ounce
-    = 31.1034768 grams
+    1 金衡盎司
+    = 31.1034768 公克
   */
 
   const usdPerGram =
@@ -131,14 +141,16 @@ async function getGold() {
 
   return {
 
-    symbol:
-      "XAU",
+    symbol: "XAU",
+
 
     priceUsdOz:
       price || null,
 
+
     priceUsdGram:
       usdPerGram,
+
 
     updatedAt:
       data.updatedAt ||
@@ -146,12 +158,13 @@ async function getGold() {
       ""
 
   };
+
 }
 
 
-/* =========================
-   Bitcoin
-========================= */
+/* ========================================
+   ₿ Bitcoin
+======================================== */
 
 async function getBitcoin() {
 
@@ -172,34 +185,36 @@ async function getBitcoin() {
 
   return {
 
-    symbol:
-      "BTC",
+    symbol: "BTC",
+
 
     usd:
       bitcoin.usd ?? null,
 
+
     twd:
       bitcoin.twd ?? null,
+
 
     change24h:
       bitcoin.usd_24h_change ?? null
 
   };
+
 }
 
 
-/* =========================
+/* ========================================
    Vercel API
-========================= */
+======================================== */
 
-export default async function handler(
-  req,
-  res
-) {
+export default async function handler(req, res) {
 
   /*
-    市場資料不用每次重新抓，
-    CDN 暫存 5 分鐘。
+    快取 5 分鐘。
+
+    避免每一個使用者重新整理頁面時，
+    都一直呼叫免費 API。
   */
 
   res.setHeader(
@@ -209,13 +224,12 @@ export default async function handler(
 
 
   /*
-    Promise.allSettled 的好處：
+    分開抓三種資料。
 
-    假設黃金 API 臨時掛掉，
-    匯率和 Bitcoin 還是可以顯示。
+    Promise.allSettled 很重要：
 
-    不會一個壞掉，
-    整個 market API 都一起死掉。
+    就算其中一個 API 掛掉，
+    其他市場資料還是可以正常顯示。
   */
 
   const results =
@@ -231,18 +245,21 @@ export default async function handler(
 
 
   let exchange = null;
+
   let gold = null;
+
   let bitcoin = null;
 
 
   const errors = [];
 
 
-  /* 匯率 */
+/* ========================================
+   匯率結果
+======================================== */
 
   if (
-    results[0].status ===
-    "fulfilled"
+    results[0].status === "fulfilled"
   ) {
 
     exchange =
@@ -258,11 +275,12 @@ export default async function handler(
   }
 
 
-  /* 黃金 */
+/* ========================================
+   黃金結果
+======================================== */
 
   if (
-    results[1].status ===
-    "fulfilled"
+    results[1].status === "fulfilled"
   ) {
 
     gold =
@@ -278,11 +296,12 @@ export default async function handler(
   }
 
 
-  /* Bitcoin */
+/* ========================================
+   Bitcoin 結果
+======================================== */
 
   if (
-    results[2].status ===
-    "fulfilled"
+    results[2].status === "fulfilled"
   ) {
 
     bitcoin =
@@ -298,9 +317,9 @@ export default async function handler(
   }
 
 
-  /*
-    黃金換算台幣 / 公克
-  */
+/* ========================================
+   🥇 黃金換算台幣 / 公克
+======================================== */
 
   let goldTwdGram = null;
 
@@ -317,9 +336,9 @@ export default async function handler(
   }
 
 
-  /*
-    如果三個來源全部失敗
-  */
+/* ========================================
+   全部 API 都失敗
+======================================== */
 
   if (
     !exchange &&
@@ -331,7 +350,7 @@ export default async function handler(
       .status(500)
       .json({
 
-        success:false,
+        success: false,
 
         message:
           "目前市場資料來源皆無法取得",
@@ -343,75 +362,86 @@ export default async function handler(
   }
 
 
+/* ========================================
+   回傳前端
+======================================== */
+
   return res
     .status(200)
     .json({
 
-      success:true,
+      success: true,
+
 
       updatedAt:
         new Date().toISOString(),
 
 
-      /*
-        首頁預設「🔥 重點」
-      */
+/* ========================================
+   🔥 重點
+======================================== */
 
-      focus:[
+      focus: [
 
         {
-          id:"usd-twd",
-          category:"fx",
 
-          symbol:"USD/TWD",
+          id: "usd-twd",
 
-          icon:"💵",
+          category: "fx",
 
-          zh:"美元 / 台幣",
+          symbol: "USD/TWD",
 
-          en:"USD / TWD",
+          icon: "💵",
+
+          zh: "美元 / 台幣",
+
+          en: "USD / TWD",
 
           value:
             exchange?.usdTwd ?? null,
 
-          decimals:3
+          decimals: 3
+
         },
 
 
         {
-          id:"gold",
 
-          category:"commodity",
+          id: "gold",
 
-          symbol:"XAU/USD",
+          category: "commodity",
 
-          icon:"🥇",
+          symbol: "XAU/USD",
 
-          zh:"黃金",
+          icon: "🥇",
 
-          en:"Gold",
+          zh: "黃金",
+
+          en: "Gold",
 
           value:
             gold?.priceUsdOz ?? null,
 
-          unit:"USD / oz",
+          unit: "USD / oz",
 
-          decimals:2
+          decimals: 2
+
         },
 
 
         {
-          id:"bitcoin",
 
-          category:"crypto",
+          id: "bitcoin",
 
-          symbol:"BTC/USD",
+          category: "crypto",
 
-          icon:"₿",
+          symbol: "BTC/USD",
 
-          zh:"Bitcoin",
+          icon: "₿",
 
-          en:"Bitcoin",
+          zh: "Bitcoin",
+
+          en: "Bitcoin",
 
           value:
             bitcoin?.usd ?? null,
@@ -419,152 +449,166 @@ export default async function handler(
           change:
             bitcoin?.change24h ?? null,
 
-          unit:"USD",
+          unit: "USD",
 
-          decimals:0
+          decimals: 0
+
         },
 
 
         {
-          id:"jpy-twd",
 
-          category:"fx",
+          id: "jpy-twd",
 
-          symbol:"JPY/TWD",
+          category: "fx",
 
-          icon:"🇯🇵",
+          symbol: "JPY/TWD",
 
-          zh:"日圓 / 台幣",
+          icon: "🇯🇵",
 
-          en:"JPY / TWD",
+          zh: "日圓 / 台幣",
+
+          en: "JPY / TWD",
 
           value:
             exchange?.jpyTwd ?? null,
 
-          decimals:4
+          decimals: 4
+
         }
 
       ],
 
 
-      /*
-        💱 匯率
-      */
+/* ========================================
+   💱 匯率
+======================================== */
 
-      fx:[
+      fx: [
 
         {
-          id:"usd-twd",
 
-          symbol:"USD/TWD",
+          id: "usd-twd",
 
-          icon:"💵",
+          symbol: "USD/TWD",
 
-          zh:"美元 / 台幣",
+          icon: "💵",
 
-          en:"USD / TWD",
+          zh: "美元 / 台幣",
+
+          en: "USD / TWD",
 
           value:
             exchange?.usdTwd ?? null,
 
-          decimals:3
+          decimals: 3
+
         },
 
 
         {
-          id:"jpy-twd",
 
-          symbol:"JPY/TWD",
+          id: "jpy-twd",
 
-          icon:"🇯🇵",
+          symbol: "JPY/TWD",
 
-          zh:"日圓 / 台幣",
+          icon: "🇯🇵",
 
-          en:"JPY / TWD",
+          zh: "日圓 / 台幣",
+
+          en: "JPY / TWD",
 
           value:
             exchange?.jpyTwd ?? null,
 
-          decimals:4
+          decimals: 4
+
         },
 
 
         {
-          id:"eur-twd",
 
-          symbol:"EUR/TWD",
+          id: "eur-twd",
 
-          icon:"🇪🇺",
+          symbol: "EUR/TWD",
 
-          zh:"歐元 / 台幣",
+          icon: "🇪🇺",
 
-          en:"EUR / TWD",
+          zh: "歐元 / 台幣",
+
+          en: "EUR / TWD",
 
           value:
             exchange?.eurTwd ?? null,
 
-          decimals:3
+          decimals: 3
+
         }
 
       ],
 
 
-      /*
-        🪙 商品 / Crypto
-      */
+/* ========================================
+   🥇 黃金 / Crypto
+======================================== */
 
-      assets:[
+      assets: [
 
         {
-          id:"gold",
 
-          symbol:"XAU/USD",
+          id: "gold",
 
-          icon:"🥇",
+          symbol: "XAU/USD",
 
-          zh:"黃金 / 盎司",
+          icon: "🥇",
 
-          en:"Gold / oz",
+          zh: "黃金 / 盎司",
+
+          en: "Gold / oz",
 
           value:
             gold?.priceUsdOz ?? null,
 
-          unit:"USD",
+          unit: "USD",
 
-          decimals:2
+          decimals: 2
+
         },
 
 
         {
-          id:"gold-twd-gram",
 
-          symbol:"XAU/TWD",
+          id: "gold-twd-gram",
 
-          icon:"✨",
+          symbol: "XAU/TWD",
 
-          zh:"黃金 / 公克",
+          icon: "✨",
 
-          en:"Gold / gram",
+          zh: "黃金 / 公克",
+
+          en: "Gold / gram",
 
           value:
             goldTwdGram,
 
-          unit:"TWD",
+          unit: "TWD",
 
-          decimals:0
+          decimals: 0
+
         },
 
 
         {
-          id:"bitcoin",
 
-          symbol:"BTC/USD",
+          id: "bitcoin",
 
-          icon:"₿",
+          symbol: "BTC/USD",
 
-          zh:"Bitcoin",
+          icon: "₿",
 
-          en:"Bitcoin",
+          zh: "Bitcoin",
+
+          en: "Bitcoin",
 
           value:
             bitcoin?.usd ?? null,
@@ -572,33 +616,33 @@ export default async function handler(
           change:
             bitcoin?.change24h ?? null,
 
-          unit:"USD",
+          unit: "USD",
 
-          decimals:0
+          decimals: 0
+
         }
 
       ],
 
 
-      /*
-        原始資料日期
-      */
+/* ========================================
+   資料日期
+======================================== */
 
-      sourceDates:{
+      sourceDates: {
 
         exchange:
-          exchange?.date || null,
+          exchange?.date ?? null,
 
         gold:
-          gold?.updatedAt || null
+          gold?.updatedAt ?? null
 
       },
 
 
-      /*
-        某個來源失敗，
-        也回傳給前端知道。
-      */
+/* ========================================
+   API 警告
+======================================== */
 
       warnings:
         errors
