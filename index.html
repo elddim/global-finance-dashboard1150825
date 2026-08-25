@@ -1,1070 +1,1362 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>國際財經情報站</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<title>🌍💰 國際財經情報站</title>
 
-    body {
-      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, #fff7cc 0, transparent 30%),
-        linear-gradient(135deg, #f7fbff, #effcf7);
-      color: #25334a;
-      min-height: 100vh;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    header {
-      padding: 35px 20px 30px;
-      background: linear-gradient(135deg, #38bdf8, #4f8cff, #37d5a2);
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    header::after {
-      content: "💰";
-      position: absolute;
-      right: 6%;
-      top: 5px;
-      font-size: 110px;
-      opacity: .12;
-      transform: rotate(15deg);
-    }
+body{
+  font-family:"Microsoft JhengHei","Noto Sans TC",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 5% 5%,#fff3b0 0,transparent 22%),
+    radial-gradient(circle at 95% 20%,#d9fff1 0,transparent 20%),
+    linear-gradient(135deg,#f8fbff,#f4fff9);
+  color:#24344d;
+  min-height:100vh;
+}
 
-    .header-inner {
-      max-width: 1200px;
-      margin: auto;
-      position: relative;
-      z-index: 2;
-    }
+/* HEADER */
 
-    .top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-    }
+header{
+  background:linear-gradient(135deg,#38bdf8,#4f8cff,#34d399);
+  color:white;
+  padding:38px 20px 32px;
+  position:relative;
+  overflow:hidden;
+}
 
-    h1 {
-      font-size: 36px;
-      margin-bottom: 8px;
-    }
+header::before{
+  content:"💰";
+  position:absolute;
+  right:7%;
+  top:-15px;
+  font-size:140px;
+  opacity:.12;
+  transform:rotate(15deg);
+}
 
-    .subtitle {
-      font-size: 15px;
-      opacity: .95;
-      line-height: 1.7;
-    }
+header::after{
+  content:"🪙";
+  position:absolute;
+  right:25%;
+  bottom:-25px;
+  font-size:80px;
+  opacity:.10;
+}
 
-    .lang-btn {
-      border: none;
-      padding: 10px 16px;
-      border-radius: 30px;
-      background: white;
-      color: #2563eb;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 5px 16px rgba(0,0,0,.12);
-    }
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  position:relative;
+  z-index:2;
+}
 
-    .updated {
-      margin-top: 15px;
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.18);
-      font-size: 13px;
-    }
+.top-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+}
 
-    nav {
-      background: rgba(255,255,255,.96);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      box-shadow: 0 4px 15px rgba(30,41,59,.06);
-    }
+h1{
+  font-size:36px;
+  margin-bottom:9px;
+}
 
-    .nav-inner {
-      max-width: 1200px;
-      margin: auto;
-      padding: 12px 16px;
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-    }
+.subtitle{
+  line-height:1.7;
+  opacity:.95;
+}
 
-    nav button {
-      border: 0;
-      background: #edf7ff;
-      padding: 9px 15px;
-      border-radius: 20px;
-      color: #2563eb;
-      cursor: pointer;
-      white-space: nowrap;
-      font-weight: 600;
-    }
+.lang-btn{
+  border:0;
+  background:white;
+  color:#2563eb;
+  font-weight:800;
+  padding:11px 17px;
+  border-radius:30px;
+  cursor:pointer;
+  box-shadow:0 5px 18px rgba(0,0,0,.13);
+}
 
-    nav button:hover {
-      background: #dff1ff;
-    }
+.updated{
+  display:inline-block;
+  margin-top:15px;
+  padding:7px 13px;
+  border-radius:20px;
+  background:rgba(255,255,255,.18);
+  font-size:13px;
+}
 
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 24px 18px 60px;
-    }
+/* NAV */
 
-    .section-title {
-      margin: 28px 0 14px;
-      font-size: 22px;
-    }
+nav{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 4px 18px rgba(30,41,59,.07);
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-    }
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:12px 18px;
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+}
 
-    .card {
-      background: rgba(255,255,255,.96);
-      border: 1px solid #e8edf4;
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 7px 22px rgba(37,99,235,.06);
-      transition: .2s;
-    }
+nav button{
+  border:0;
+  padding:9px 14px;
+  border-radius:20px;
+  background:#eef7ff;
+  color:#2563eb;
+  font-weight:700;
+  cursor:pointer;
+  white-space:nowrap;
+}
 
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(37,99,235,.10);
-    }
+nav button:hover{
+  background:#dff1ff;
+}
 
-    .market-card {
-      position: relative;
-      overflow: hidden;
-    }
+/* MAIN */
 
-    .market-card::after {
-      content: "🪙";
-      position: absolute;
-      right: 10px;
-      bottom: 4px;
-      opacity: .1;
-      font-size: 48px;
-    }
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:24px 18px 60px;
+}
 
-    .market-name {
-      color: #64748b;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
+.section-title{
+  font-size:22px;
+  margin:30px 0 15px;
+}
 
-    .market-value {
-      font-size: 25px;
-      font-weight: 800;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:15px;
+}
 
-    .up {
-      color: #ef4444;
-      margin-top: 6px;
-    }
+.card{
+  background:rgba(255,255,255,.96);
+  border:1px solid #e8edf4;
+  border-radius:19px;
+  padding:19px;
+  box-shadow:0 7px 25px rgba(37,99,235,.07);
+  transition:.2s;
+}
 
-    .down {
-      color: #10b981;
-      margin-top: 6px;
-    }
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(37,99,235,.11);
+}
 
-    .trump {
-      border-left: 6px solid #fbbf24;
-      background: linear-gradient(135deg, #fffbea, #ffffff);
-    }
+/* MARKET */
 
-    .trump-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 12px;
-    }
+.market-card{
+  position:relative;
+  overflow:hidden;
+}
 
-    .tag {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 12px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      margin: 3px 4px 3px 0;
-    }
+.market-card::after{
+  content:"🪙";
+  position:absolute;
+  right:8px;
+  bottom:0;
+  font-size:52px;
+  opacity:.08;
+}
 
-    .tag-gold {
-      background: #fff3c4;
-      color: #9a6700;
-    }
+.market-name{
+  color:#64748b;
+  font-size:13px;
+  margin-bottom:7px;
+}
 
-    .quote {
-      font-size: 18px;
-      font-weight: bold;
-      line-height: 1.7;
-      margin: 12px 0;
-    }
+.market-value{
+  font-size:25px;
+  font-weight:900;
+}
 
-    .small {
-      color: #718096;
-      font-size: 12px;
-      line-height: 1.7;
-    }
+.up{
+  color:#ef4444;
+  margin-top:6px;
+}
 
-    .impact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-      gap: 10px;
-      margin-top: 15px;
-    }
+.down{
+  color:#10b981;
+  margin-top:6px;
+}
 
-    .impact-box {
-      border-radius: 12px;
-      padding: 12px;
-      background: #f8fafc;
-      font-size: 14px;
-      line-height: 1.6;
-    }
+/* TRUMP */
 
-    .search-card {
-      background: linear-gradient(135deg, #ecfeff, #f0fdf4);
-    }
+.trump{
+  border-left:6px solid #fbbf24;
+  background:linear-gradient(135deg,#fff9dd,#ffffff);
+}
 
-    .search-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
+.trump-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+}
 
-    .search-row input {
-      flex: 1;
-      min-width: 210px;
-      border: 1px solid #cbd5e1;
-      padding: 13px 15px;
-      border-radius: 12px;
-      outline: none;
-      font-size: 15px;
-    }
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  margin:3px;
+  border-radius:20px;
+  font-size:12px;
+  background:#eff6ff;
+  color:#1d4ed8;
+}
 
-    .search-row input:focus {
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 3px rgba(56,189,248,.15);
-    }
+.tag-gold{
+  background:#fff0b8;
+  color:#936400;
+}
 
-    .primary-btn {
-      border: none;
-      border-radius: 12px;
-      padding: 12px 18px;
-      cursor: pointer;
-      background: linear-gradient(135deg, #2563eb, #38bdf8);
-      color: white;
-      font-weight: bold;
-    }
+.quote{
+  font-size:18px;
+  font-weight:800;
+  line-height:1.7;
+  margin:15px 0;
+}
 
-    #stockResult {
-      margin-top: 18px;
-      display: none;
-    }
+.small{
+  color:#718096;
+  font-size:13px;
+  line-height:1.7;
+}
 
-    .sector-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
+.impact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:10px;
+  margin-top:16px;
+}
 
-    .sector {
-      padding: 8px 12px;
-      border-radius: 18px;
-      background: #ecfdf5;
-      color: #047857;
-      font-size: 13px;
-    }
+.impact-box{
+  background:#f8fafc;
+  padding:13px;
+  border-radius:13px;
+  line-height:1.6;
+  font-size:14px;
+}
 
-    .news-title {
-      font-weight: 800;
-      font-size: 16px;
-      line-height: 1.6;
-      margin: 8px 0;
-    }
+/* SEARCH */
 
-    .news-desc {
-      color: #64748b;
-      font-size: 13px;
-      line-height: 1.7;
-    }
+.search-card{
+  background:linear-gradient(135deg,#eafffb,#f3fff4,#fffceb);
+  border:1px solid #c9f4e5;
+}
 
-    .money-flow {
-      background: linear-gradient(135deg, #fff9db, #f0fdf4);
-    }
+.search-title{
+  font-size:19px;
+  font-weight:900;
+}
 
-    .flow-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 15px;
-    }
+.search-description{
+  margin-top:6px;
+  color:#64748b;
+  font-size:13px;
+}
 
-    .flow-box {
-      background: white;
-      border-radius: 14px;
-      padding: 15px;
-    }
+.search-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:17px;
+}
 
-    .bar {
-      width: 100%;
-      height: 9px;
-      background: #e2e8f0;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 6px 0 12px;
-    }
+.search-row input{
+  flex:1;
+  min-width:220px;
+  padding:14px 16px;
+  border-radius:13px;
+  border:1px solid #cbd5e1;
+  font-size:16px;
+  outline:none;
+  background:white;
+}
 
-    .bar span {
-      display: block;
-      height: 100%;
-      background: linear-gradient(90deg,#34d399,#38bdf8);
-    }
+.search-row input:focus{
+  border-color:#38bdf8;
+  box-shadow:0 0 0 4px rgba(56,189,248,.13);
+}
 
-    footer {
-      background: #172033;
-      color: #aab5c5;
-      padding: 26px 20px;
-      text-align: center;
-      font-size: 12px;
-      line-height: 1.9;
-    }
+.primary-btn{
+  border:0;
+  padding:13px 19px;
+  border-radius:13px;
+  background:linear-gradient(135deg,#2563eb,#38bdf8);
+  color:white;
+  font-weight:900;
+  cursor:pointer;
+  font-size:14px;
+}
 
-    @media (max-width: 650px) {
-      h1 {
-        font-size: 27px;
-      }
+.primary-btn:hover{
+  transform:translateY(-1px);
+}
 
-      .top-row {
-        flex-direction: column;
-      }
+/* RESULT */
 
-      .flow-row {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+#stockResult{
+  display:none;
+  margin-top:20px;
+}
+
+.result-card{
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  border:1px solid #dbeafe;
+}
+
+.stock-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.stock-name{
+  font-size:23px;
+  font-weight:900;
+}
+
+.market-badge{
+  background:#dcfce7;
+  color:#047857;
+  border-radius:20px;
+  padding:6px 11px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.stock-info{
+  margin-top:14px;
+  line-height:1.8;
+}
+
+.status{
+  margin-top:15px;
+  padding:11px 13px;
+  border-radius:10px;
+  background:#f0fdf4;
+  color:#047857;
+  font-size:13px;
+}
+
+/* LOADING */
+
+.loading{
+  text-align:center;
+  padding:20px;
+  font-size:16px;
+}
+
+.coin{
+  display:inline-block;
+  animation:coin 1s infinite alternate;
+}
+
+@keyframes coin{
+  from{
+    transform:translateY(0) rotate(0);
+  }
+  to{
+    transform:translateY(-6px) rotate(15deg);
+  }
+}
+
+/* SECTOR */
+
+.sectors{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
+.sector{
+  background:#ecfdf5;
+  color:#047857;
+  padding:8px 12px;
+  border-radius:18px;
+  font-size:13px;
+}
+
+/* NEWS */
+
+.news-title{
+  font-size:16px;
+  font-weight:900;
+  line-height:1.6;
+  margin:8px 0;
+}
+
+.news-desc{
+  color:#64748b;
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* MONEY */
+
+.money{
+  background:linear-gradient(135deg,#fff9d9,#edfff7);
+}
+
+.money-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:15px;
+}
+
+.money-box{
+  background:white;
+  padding:16px;
+  border-radius:14px;
+}
+
+.bar{
+  height:9px;
+  background:#e2e8f0;
+  border-radius:10px;
+  margin:7px 0 13px;
+  overflow:hidden;
+}
+
+.bar span{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#34d399,#38bdf8);
+}
+
+/* DISCLAIMER */
+
+.notice{
+  margin-top:30px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  padding:16px;
+  border-radius:15px;
+  color:#9a5b13;
+  line-height:1.8;
+  font-size:13px;
+}
+
+footer{
+  background:#172033;
+  color:#aab5c5;
+  text-align:center;
+  padding:28px 20px;
+  font-size:12px;
+  line-height:1.9;
+}
+
+@media(max-width:650px){
+
+  h1{
+    font-size:27px;
+  }
+
+  .top-row{
+    flex-direction:column;
+  }
+
+  .money-grid{
+    grid-template-columns:1fr;
+  }
+
+  .primary-btn{
+    width:100%;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="header-inner">
 
-    <div class="top-row">
-      <div>
-        <h1 data-zh="🌍💰 國際財經情報站"
-            data-en="🌍💰 Global Finance Intelligence">
-          🌍💰 國際財經情報站
-        </h1>
+<div class="header-inner">
 
-        <div class="subtitle"
-             data-zh="全球市場 × 財經新聞 × Trump Watch × 台股影響分析"
-             data-en="Global Markets × Financial News × Trump Watch × Taiwan Stock Impact">
-          全球市場 × 財經新聞 × Trump Watch × 台股影響分析
-        </div>
+  <div class="top-row">
+
+    <div>
+
+      <h1
+        data-zh="🌍💰 國際財經情報站"
+        data-en="🌍💰 Global Finance Intelligence">
+        🌍💰 國際財經情報站
+      </h1>
+
+      <div class="subtitle"
+        data-zh="全球市場 × Trump Watch × 台股搜尋 × 國際財經情報"
+        data-en="Global Markets × Trump Watch × Taiwan Stocks × Financial Intelligence">
+
+        全球市場 × Trump Watch × 台股搜尋 × 國際財經情報
+
       </div>
 
-      <button class="lang-btn" onclick="toggleLanguage()">
-        中文 / EN
-      </button>
     </div>
 
-    <div class="updated" id="updated"></div>
-
-  </div>
-</header>
-
-<nav>
-  <div class="nav-inner">
-    <button onclick="goTo('market')"
-      data-zh="📊 全球市場"
-      data-en="📊 Markets">
-      📊 全球市場
+    <button class="lang-btn" onclick="toggleLanguage()">
+      中文 / EN
     </button>
 
-    <button onclick="goTo('trump')"
-      data-zh="🇺🇸 Trump Watch"
-      data-en="🇺🇸 Trump Watch">
-      🇺🇸 Trump Watch
-    </button>
-
-    <button onclick="goTo('stock')"
-      data-zh="🔎 台股影響"
-      data-en="🔎 Stock Impact">
-      🔎 台股影響
-    </button>
-
-    <button onclick="goTo('news')"
-      data-zh="📰 國際新聞"
-      data-en="📰 Global News">
-      📰 國際新聞
-    </button>
-  </div>
-</nav>
-
-<main>
-
-  <h2 class="section-title" id="market"
-      data-zh="💵 全球市場快覽"
-      data-en="💵 Global Market Snapshot">
-    💵 全球市場快覽
-  </h2>
-
-  <div class="grid">
-
-    <div class="card market-card">
-      <div class="market-name">🇺🇸 S&P 500</div>
-      <div class="market-value">6,480.25</div>
-      <div class="up">▲ +0.42%</div>
-    </div>
-
-    <div class="card market-card">
-      <div class="market-name">🇺🇸 NASDAQ</div>
-      <div class="market-value">21,530.80</div>
-      <div class="up">▲ +0.66%</div>
-    </div>
-
-    <div class="card market-card">
-      <div class="market-name">🇹🇼 Taiwan</div>
-      <div class="market-value">24,110</div>
-      <div class="down">▼ -0.18%</div>
-    </div>
-
-    <div class="card market-card">
-      <div class="market-name">₿ Bitcoin</div>
-      <div class="market-value">$112,300</div>
-      <div class="up">▲ +1.20%</div>
-    </div>
-
   </div>
 
-
-  <h2 class="section-title" id="trump">
-    🇺🇸 Trump Watch
-  </h2>
-
-  <div class="card trump">
-
-    <div class="trump-top">
-      <strong data-zh="🗣️ 最新財經政策發言"
-              data-en="🗣️ Latest Economic Statement">
-        🗣️ 最新財經政策發言
-      </strong>
-
-      <span class="tag tag-gold"
-            data-zh="關稅 / 貿易"
-            data-en="Tariffs / Trade">
-        關稅 / 貿易
-      </span>
-    </div>
-
-    <div class="quote"
-         data-zh="涉及關稅、製造業、貿易與科技產業的最新發言將顯示於此。"
-         data-en="Latest statements involving tariffs, manufacturing, trade and technology will appear here.">
-      涉及關稅、製造業、貿易與科技產業的最新發言將顯示於此。
-    </div>
-
-    <div class="small"
-         data-zh="⚠️ 初版為示範資料。正式版會顯示發言日期、新聞來源及原始連結。"
-         data-en="⚠️ Demo data only. The live version will show date, source and original article link.">
-      ⚠️ 初版為示範資料。正式版會顯示發言日期、新聞來源及原始連結。
-    </div>
-
-    <div class="impact-grid">
-
-      <div class="impact-box">
-        💻
-        <strong data-zh="半導體" data-en="Semiconductors">半導體</strong>
-        <br>
-        🔴
-        <span data-zh="高度影響" data-en="High Impact">高度影響</span>
-      </div>
-
-      <div class="impact-box">
-        🤖 AI
-        <br>
-        🟠
-        <span data-zh="中度影響" data-en="Medium Impact">中度影響</span>
-      </div>
-
-      <div class="impact-box">
-        💵
-        <strong data-zh="美元" data-en="US Dollar">美元</strong>
-        <br>
-        🟡
-        <span data-zh="持續觀察" data-en="Watch">持續觀察</span>
-      </div>
-
-      <div class="impact-box">
-        🇹🇼
-        <strong data-zh="台股" data-en="Taiwan Stocks">台股</strong>
-        <br>
-        🟠
-        <span data-zh="供應鏈影響" data-en="Supply Chain">供應鏈影響</span>
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <h2 class="section-title" id="stock"
-      data-zh="🔎 台股影響搜尋"
-      data-en="🔎 Taiwan Stock Impact Search">
-    🔎 台股影響搜尋
-  </h2>
-
-  <div class="card search-card">
-
-    <strong
-      data-zh="搜尋上市 / 上櫃公司"
-      data-en="Search TWSE / TPEx Companies">
-      搜尋上市 / 上櫃公司
-    </strong>
-
-    <div class="search-row">
-
-      <input
-        id="stockInput"
-        placeholder="例如：2330、台積電、聯發科"
-      />
-
-      <button class="primary-btn"
-              onclick="searchStock()"
-              data-zh="開始分析 💰"
-              data-en="Analyze 💰">
-        開始分析 💰
-      </button>
-
-    </div>
-
-<div id="stockResult" style="display:none; margin-top:18px;">
-
-  <hr style="border:0;border-top:1px solid #dce6ed;margin:20px 0;">
-
-  <h3 id="stockName">
-    🏢 股票資料
-  </h3>
-
-  <div style="margin-top:12px;">
-    <span class="tag" id="stockMarket">市場</span>
-    <span class="tag" id="stockIndustry">產業</span>
-  </div>
-
-  <div id="stockFullName"
-       class="small"
-       style="margin-top:12px;">
-  </div>
-
-  <div id="stockStatus"
-       style="margin-top:15px;font-size:14px;">
-  </div>
+  <div class="updated" id="updated"></div>
 
 </div>
 
-      <div class="impact-grid">
-
-        <div class="impact-box">
-          🤖 AI
-          <br>
-          🟢
-          <span data-zh="可能正面" data-en="Potential Positive">
-            可能正面
-          </span>
-        </div>
-
-        <div class="impact-box">
-          🇺🇸
-          <span data-zh="美國政策" data-en="US Policy">
-            美國政策
-          </span>
-          <br>
-          🔴
-          <span data-zh="高度關注" data-en="High Attention">
-            高度關注
-          </span>
-        </div>
-
-        <div class="impact-box">
-          💵
-          <span data-zh="美元匯率" data-en="USD Exchange Rate">
-            美元匯率
-          </span>
-          <br>
-          🟡
-          <span data-zh="中度影響" data-en="Medium Impact">
-            中度影響
-          </span>
-        </div>
-
-      </div>
-
-      <h4 style="margin-top:18px;"
-          data-zh="🏭 可能相關類股"
-          data-en="🏭 Related Sectors">
-        🏭 可能相關類股
-      </h4>
-
-      <div class="sector-list">
-        <div class="sector">半導體</div>
-        <div class="sector">AI Server</div>
-        <div class="sector">電子零組件</div>
-        <div class="sector">資料中心</div>
-        <div class="sector">電力設備</div>
-      </div>
-
-    </div>
-
-  </div>
+</header>
 
 
-  <h2 class="section-title"
-      data-zh="💰 今日市場錢流"
-      data-en="💰 Market Money Flow">
-    💰 今日市場錢流
-  </h2>
+<nav>
 
-  <div class="card money-flow">
+<div class="nav-inner">
 
-    <div class="flow-row">
+<button onclick="goTo('market')"
+data-zh="📊 全球市場"
+data-en="📊 Markets">
+📊 全球市場
+</button>
 
-      <div class="flow-box">
+<button onclick="goTo('trump')">
+🇺🇸 Trump Watch
+</button>
 
-        <strong
-          data-zh="📈 市場關注升溫"
-          data-en="📈 Rising Attention">
-          📈 市場關注升溫
-        </strong>
+<button onclick="goTo('stock')"
+data-zh="🔎 台股搜尋"
+data-en="🔎 Stock Search">
+🔎 台股搜尋
+</button>
 
-        <p style="margin-top:12px;">🤖 AI</p>
-        <div class="bar">
-          <span style="width:88%"></span>
-        </div>
+<button onclick="goTo('news')"
+data-zh="📰 財經焦點"
+data-en="📰 Finance News">
+📰 財經焦點
+</button>
 
-        <p>💻 半導體</p>
-        <div class="bar">
-          <span style="width:82%"></span>
-        </div>
+</div>
 
-        <p>🪙 黃金</p>
-        <div class="bar">
-          <span style="width:66%"></span>
-        </div>
-
-      </div>
+</nav>
 
 
-      <div class="flow-box">
+<main>
 
-        <strong
-          data-zh="⚠️ 市場風險觀察"
-          data-en="⚠️ Market Risk Watch">
-          ⚠️ 市場風險觀察
-        </strong>
+<!-- MARKET -->
 
-        <p style="margin-top:12px;">🚗 汽車</p>
-        <div class="bar">
-          <span style="width:65%"></span>
-        </div>
-
-        <p>🌎 出口產業</p>
-        <div class="bar">
-          <span style="width:60%"></span>
-        </div>
-
-        <p>🛢️ 能源</p>
-        <div class="bar">
-          <span style="width:52%"></span>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+<h2 class="section-title" id="market"
+data-zh="💵 全球市場快覽"
+data-en="💵 Global Market Snapshot">
+💵 全球市場快覽
+</h2>
 
 
-  <h2 class="section-title" id="news"
-      data-zh="📰 國際財經焦點"
-      data-en="📰 Global Financial News">
-    📰 國際財經焦點
-  </h2>
+<div class="grid">
 
-  <div class="grid">
+<div class="card market-card">
 
-    <div class="card">
-      <span class="tag">🇺🇸 Fed</span>
+<div class="market-name">
+🇺🇸 S&P 500
+</div>
 
-      <div class="news-title"
-           data-zh="市場持續關注美國利率政策"
-           data-en="Markets continue to watch US interest-rate policy">
-        市場持續關注美國利率政策
-      </div>
+<div class="market-value">
+6,480.25
+</div>
 
-      <div class="news-desc"
-           data-zh="利率預期可能影響美元、美債及科技股表現。"
-           data-en="Rate expectations may affect the dollar, Treasury yields and technology stocks.">
-        利率預期可能影響美元、美債及科技股表現。
-      </div>
+<div class="up">
+▲ +0.42%
+</div>
 
-    </div>
+</div>
 
 
-    <div class="card">
-      <span class="tag">🤖 AI</span>
+<div class="card market-card">
 
-      <div class="news-title"
-           data-zh="AI 基礎建設仍為重要市場主題"
-           data-en="AI infrastructure remains a major market theme">
-        AI 基礎建設仍為重要市場主題
-      </div>
+<div class="market-name">
+🇺🇸 NASDAQ
+</div>
 
-      <div class="news-desc"
-           data-zh="半導體、伺服器、電力與資料中心供應鏈持續受到關注。"
-           data-en="Semiconductors, servers, power and data-center supply chains remain in focus.">
-        半導體、伺服器、電力與資料中心供應鏈持續受到關注。
-      </div>
+<div class="market-value">
+21,530.80
+</div>
 
-    </div>
+<div class="up">
+▲ +0.66%
+</div>
+
+</div>
 
 
-    <div class="card">
-      <span class="tag">🛢️ Energy</span>
+<div class="card market-card">
 
-      <div class="news-title"
-           data-zh="能源價格與地緣政治風險"
-           data-en="Energy prices and geopolitical risks">
-        能源價格與地緣政治風險
-      </div>
+<div class="market-name">
+🇹🇼 Taiwan
+</div>
 
-      <div class="news-desc"
-           data-zh="原油價格變化可能進一步影響全球通膨與運輸成本。"
-           data-en="Oil-price movements may affect global inflation and transportation costs.">
-        原油價格變化可能進一步影響全球通膨與運輸成本。
-      </div>
+<div class="market-value">
+24,110
+</div>
 
-    </div>
+<div class="down">
+▼ -0.18%
+</div>
 
-  </div>
+</div>
+
+
+<div class="card market-card">
+
+<div class="market-name">
+₿ Bitcoin
+</div>
+
+<div class="market-value">
+$112,300
+</div>
+
+<div class="up">
+▲ +1.20%
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TRUMP -->
+
+<h2 class="section-title" id="trump">
+🇺🇸 Trump Watch
+</h2>
+
+
+<div class="card trump">
+
+<div class="trump-top">
+
+<strong
+data-zh="🗣️ 最新財經政策動態"
+data-en="🗣️ Latest Economic Policy Update">
+🗣️ 最新財經政策動態
+</strong>
+
+<span class="tag tag-gold"
+data-zh="關稅 / 貿易"
+data-en="Tariffs / Trade">
+關稅 / 貿易
+</span>
+
+</div>
+
+
+<div class="quote"
+data-zh="涉及關稅、製造業、貿易、科技與金融市場的重要發言將顯示於此。"
+data-en="Important statements involving tariffs, manufacturing, trade, technology and financial markets will appear here.">
+
+涉及關稅、製造業、貿易、科技與金融市場的重要發言將顯示於此。
+
+</div>
+
+
+<div class="small"
+data-zh="⚠️ 目前為版面示範。之後將串接可靠新聞來源、日期及原始連結。"
+data-en="⚠️ Currently a prototype. Reliable news sources, dates and original links will be connected later.">
+
+⚠️ 目前為版面示範。之後將串接可靠新聞來源、日期及原始連結。
+
+</div>
+
+
+<div class="impact-grid">
+
+<div class="impact-box">
+💻 <strong data-zh="半導體" data-en="Semiconductors">半導體</strong>
+<br>
+🔴 <span data-zh="高度關注" data-en="High Attention">高度關注</span>
+</div>
+
+<div class="impact-box">
+🤖 AI
+<br>
+🟠 <span data-zh="中度影響" data-en="Medium Impact">中度影響</span>
+</div>
+
+<div class="impact-box">
+💵 <strong data-zh="美元" data-en="US Dollar">美元</strong>
+<br>
+🟡 <span data-zh="持續觀察" data-en="Watch">持續觀察</span>
+</div>
+
+<div class="impact-box">
+🇹🇼 <strong data-zh="台股" data-en="Taiwan Stocks">台股</strong>
+<br>
+🟠 <span data-zh="供應鏈關注" data-en="Supply Chain">供應鏈關注</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- STOCK SEARCH -->
+
+<h2 class="section-title" id="stock"
+data-zh="🔎 上市・上櫃股票搜尋"
+data-en="🔎 TWSE・TPEx Stock Search">
+
+🔎 上市・上櫃股票搜尋
+
+</h2>
+
+
+<div class="card search-card">
+
+<div class="search-title"
+data-zh="💰 今天想研究哪一家公司？"
+data-en="💰 Which company do you want to research?">
+
+💰 今天想研究哪一家公司？
+
+</div>
+
+
+<div class="search-description"
+data-zh="可以輸入股票代號或公司名稱，例如：2330、台積電、2454、聯發科"
+data-en="Enter a stock code or company name, e.g. 2330, TSMC, 2454, MediaTek">
+
+可以輸入股票代號或公司名稱，例如：2330、台積電、2454、聯發科
+
+</div>
+
+
+<div class="search-row">
+
+<input
+id="stockInput"
+type="text"
+placeholder="輸入股票代號或公司名稱"
+onkeydown="if(event.key==='Enter') searchStock();"
+>
+
+<button
+class="primary-btn"
+onclick="searchStock()"
+data-zh="搜尋股票 🔎"
+data-en="Search 🔎">
+
+搜尋股票 🔎
+
+</button>
+
+</div>
+
+
+<div id="stockResult"></div>
+
+</div>
+
+
+<!-- MONEY FLOW -->
+
+<h2 class="section-title"
+data-zh="💰 今日市場雷達"
+data-en="💰 Market Radar">
+
+💰 今日市場雷達
+
+</h2>
+
+
+<div class="card money">
+
+<div class="money-grid">
+
+<div class="money-box">
+
+<strong
+data-zh="📈 市場關注升溫"
+data-en="📈 Rising Attention">
+
+📈 市場關注升溫
+
+</strong>
+
+<p style="margin-top:13px;">🤖 AI</p>
+
+<div class="bar">
+<span style="width:88%"></span>
+</div>
+
+<p>💻 半導體</p>
+
+<div class="bar">
+<span style="width:82%"></span>
+</div>
+
+<p>⚡ 資料中心 / 電力</p>
+
+<div class="bar">
+<span style="width:68%"></span>
+</div>
+
+</div>
+
+
+<div class="money-box">
+
+<strong
+data-zh="⚠️ 全球風險觀察"
+data-en="⚠️ Global Risk Watch">
+
+⚠️ 全球風險觀察
+
+</strong>
+
+<p style="margin-top:13px;">🌎 關稅</p>
+
+<div class="bar">
+<span style="width:76%"></span>
+</div>
+
+<p>💵 利率 / 美元</p>
+
+<div class="bar">
+<span style="width:64%"></span>
+</div>
+
+<p>🛢️ 能源</p>
+
+<div class="bar">
+<span style="width:52%"></span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NEWS -->
+
+<h2 class="section-title" id="news"
+data-zh="📰 國際財經焦點"
+data-en="📰 Global Financial Focus">
+
+📰 國際財經焦點
+
+</h2>
+
+
+<div class="grid">
+
+<div class="card">
+
+<span class="tag">
+🇺🇸 Fed
+</span>
+
+<div class="news-title"
+data-zh="市場關注美國利率政策"
+data-en="Markets watch US interest-rate policy">
+
+市場關注美國利率政策
+
+</div>
+
+<div class="news-desc"
+data-zh="利率與通膨預期可能影響美元、美債、科技股及全球資金流向。"
+data-en="Rate and inflation expectations may affect the dollar, bonds, technology stocks and global capital flows.">
+
+利率與通膨預期可能影響美元、美債、科技股及全球資金流向。
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<span class="tag">
+🤖 AI
+</span>
+
+<div class="news-title"
+data-zh="AI 基礎建設持續受到關注"
+data-en="AI infrastructure remains in focus">
+
+AI 基礎建設持續受到關注
+
+</div>
+
+<div class="news-desc"
+data-zh="半導體、AI 伺服器、資料中心與電力供應鏈仍是重要市場主題。"
+data-en="Semiconductors, AI servers, data centers and power supply chains remain major market themes.">
+
+半導體、AI 伺服器、資料中心與電力供應鏈仍是重要市場主題。
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<span class="tag">
+🌍 Global
+</span>
+
+<div class="news-title"
+data-zh="全球貿易與關稅政策"
+data-en="Global trade and tariff policy">
+
+全球貿易與關稅政策
+
+</div>
+
+<div class="news-desc"
+data-zh="貿易政策可能影響出口企業、製造業、汽車與科技供應鏈。"
+data-en="Trade policy may affect exporters, manufacturing, automobiles and technology supply chains.">
+
+貿易政策可能影響出口企業、製造業、汽車與科技供應鏈。
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="notice">
+
+<strong
+data-zh="⚠️ 重要提醒"
+data-en="⚠️ Important Notice">
+
+⚠️ 重要提醒
+
+</strong>
+
+<br>
+
+<span
+data-zh="目前全球市場數字、Trump Watch、市場雷達及新聞內容仍為初版展示資料。上市／上櫃股票搜尋則會透過本站 /api/stocks 取得資料。"
+data-en="Global market figures, Trump Watch, market radar and news are currently prototype data. TWSE/TPEx stock search retrieves data through this site's /api/stocks endpoint.">
+
+目前全球市場數字、Trump Watch、市場雷達及新聞內容仍為初版展示資料。上市／上櫃股票搜尋則會透過本站 /api/stocks 取得資料。
+
+</span>
+
+</div>
 
 </main>
 
 
 <footer>
 
-  🌍💰 國際財經情報站
-  <br><br>
+🌍💰 國際財經情報站
 
-  <span
-    data-zh="本網站資訊僅供研究、學習與資訊整理用途，不構成任何投資建議。"
-    data-en="Information on this website is for research and educational purposes only and does not constitute investment advice.">
-    本網站資訊僅供研究、學習與資訊整理用途，不構成任何投資建議。
-  </span>
+<br><br>
 
-  <br>
+<span
+data-zh="本網站資訊僅供研究、學習與資訊整理用途，不構成投資建議、買賣建議或任何形式之招攬。"
+data-en="This website is for research, educational and informational purposes only and does not constitute investment advice.">
 
-  <span
-    data-zh="初版市場數字及新聞內容為展示資料，後續版本才會串接即時資料來源。"
-    data-en="Market figures and news shown in this prototype are demo data. Live data will be connected in a later version.">
-    初版市場數字及新聞內容為展示資料，後續版本才會串接即時資料來源。
-  </span>
+本網站資訊僅供研究、學習與資訊整理用途，不構成投資建議、買賣建議或任何形式之招攬。
+
+</span>
 
 </footer>
 
 
 <script>
 
-  let language = "zh";
+let language="zh";
 
-  function updateTime() {
-    const now = new Date();
 
-    const text =
-      language === "zh"
-      ? "🕒 更新時間：" + now.toLocaleString("zh-TW")
-      : "🕒 Updated: " + now.toLocaleString("en-US");
+/* 時間 */
 
-    document.getElementById("updated").textContent = text;
-  }
+function updateTime(){
 
-  updateTime();
+  const now=new Date();
 
-
-  function toggleLanguage() {
-
-    language =
-      language === "zh"
-      ? "en"
-      : "zh";
-
-    document
-      .querySelectorAll("[data-zh]")
-      .forEach(el => {
-
-        el.textContent =
-          language === "zh"
-          ? el.dataset.zh
-          : el.dataset.en;
-
-      });
-
-    document.getElementById("stockInput").placeholder =
-      language === "zh"
-      ? "例如：2330、台積電、聯發科"
-      : "Example: 2330, TSMC, MediaTek";
-
-    updateTime();
-  }
-
-
-  function goTo(id) {
-
-    document
-      .getElementById(id)
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-
-  }
-
-
- async function searchStock() {
-
-  const input =
-    document.getElementById("stockInput");
-
-  const value =
-    input.value.trim();
-
-  if (!value) {
-
-    alert(
-      language === "zh"
-      ? "請輸入股票代號或公司名稱"
-      : "Please enter a stock code or company name"
-    );
-
-    return;
-  }
-
-
-  const result =
-    document.getElementById("stockResult");
-
-  const name =
-    document.getElementById("stockName");
-
-  const market =
-    document.getElementById("stockMarket");
-
-  const industry =
-    document.getElementById("stockIndustry");
-
-  const fullName =
-    document.getElementById("stockFullName");
-
-  const status =
-    document.getElementById("stockStatus");
-
-
-  result.style.display = "block";
-
-  name.textContent =
-    language === "zh"
-    ? "🔎 搜尋中..."
-    : "🔎 Searching...";
-
-  market.textContent = "－";
-  industry.textContent = "－";
-  fullName.textContent = "";
-
-  status.textContent =
-    language === "zh"
-    ? "正在取得上市／上櫃公司資料 💰"
-    : "Loading TWSE / TPEx company data 💰";
-
-
-  try {
-
-    const response =
-      await fetch(
-        "/api/stocks?q=" +
-        encodeURIComponent(value)
-      );
-
-
-    if (!response.ok) {
-      throw new Error("API error");
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if (
-      !data.success ||
-      !data.data ||
-      data.data.length === 0
-    ) {
-
-      name.textContent =
-        language === "zh"
-        ? "😢 找不到這檔股票"
-        : "😢 Stock not found";
-
-      market.textContent = "－";
-      industry.textContent = "－";
-
-      fullName.textContent =
-        language === "zh"
-        ? "請確認股票代號或公司名稱。"
-        : "Please check the stock code or company name.";
-
-      status.textContent = "";
-
-      return;
-    }
-
-
-    const stock =
-      data.data[0];
-
-
-    name.textContent =
-      "🏢 " +
-      stock.code +
-      " " +
-      stock.name;
-
-
-    market.textContent =
-      stock.market || "－";
-
-
-    industry.textContent =
-      stock.industry
-      ? "🏭 " + stock.industry
-      : "🏭 產業資料未提供";
-
-
-    fullName.textContent =
-      stock.fullName || "";
-
-
-    status.textContent =
-      language === "zh"
-      ? "✅ 已從上市／上櫃資料找到此公司"
-      : "✅ Company found in TWSE / TPEx data";
-
-
-  } catch (error) {
-
-    console.error(error);
-
-    name.textContent =
-      language === "zh"
-      ? "⚠️ 股票資料暫時無法取得"
-      : "⚠️ Unable to load stock data";
-
-    market.textContent = "－";
-    industry.textContent = "－";
-    fullName.textContent = "";
-
-    status.textContent =
-      language === "zh"
-      ? "請稍後再試。"
-      : "Please try again later.";
-
-  }
-
-
-  result.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  });
+  document.getElementById("updated").textContent=
+    language==="zh"
+    ?"🕒 更新時間："+now.toLocaleString("zh-TW")
+    :"🕒 Updated: "+now.toLocaleString("en-US");
 
 }
 
-    const value =
-      document
-      .getElementById("stockInput")
-      .value
-      .trim();
+updateTime();
 
-    if (!value) {
 
-      alert(
-        language === "zh"
-        ? "請輸入股票代號或公司名稱"
-        : "Please enter a stock code or company name"
-      );
+/* 中英切換 */
 
-      return;
-    }
+function toggleLanguage(){
 
-    const result =
-      document.getElementById("stockResult");
+  language=
+    language==="zh"
+    ?"en"
+    :"zh";
 
-    result.style.display = "block";
+  document
+    .querySelectorAll("[data-zh]")
+    .forEach(function(el){
 
-    const name =
-      document.getElementById("stockName");
+      el.textContent=
+        language==="zh"
+        ?el.dataset.zh
+        :el.dataset.en;
 
-    if (
-      value.includes("2330") ||
-      value.includes("台積電") ||
-      value.toLowerCase().includes("tsmc")
-    ) {
-
-      name.textContent =
-        "🏢 2330 台積電 TSMC";
-
-    } else if (
-      value.includes("2454") ||
-      value.includes("聯發科")
-    ) {
-
-      name.textContent =
-        "🏢 2454 聯發科 MediaTek";
-
-    } else {
-
-      name.textContent =
-        "🏢 " + value +
-        (
-          language === "zh"
-          ? "｜示範分析"
-          : " | Demo Analysis"
-        );
-
-    }
-
-    result.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
     });
 
+
+  document.getElementById("stockInput").placeholder=
+    language==="zh"
+    ?"輸入股票代號或公司名稱"
+    :"Enter stock code or company name";
+
+  updateTime();
+
+}
+
+
+/* 導航 */
+
+function goTo(id){
+
+  document
+    .getElementById(id)
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* 股票搜尋 */
+
+async function searchStock(){
+
+  const input=
+    document.getElementById("stockInput");
+
+  const keyword=
+    input.value.trim();
+
+  const result=
+    document.getElementById("stockResult");
+
+
+  if(!keyword){
+
+    alert(
+      language==="zh"
+      ?"請輸入股票代號或公司名稱 💰"
+      :"Please enter a stock code or company name 💰"
+    );
+
+    return;
+
   }
+
+
+  result.style.display="block";
+
+  result.innerHTML=`
+    <div class="loading">
+      <span class="coin">🪙</span>
+      ${
+        language==="zh"
+        ?" 正在搜尋上市／上櫃股票..."
+        :" Searching TWSE / TPEx stocks..."
+      }
+    </div>
+  `;
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/stocks?q="+
+        encodeURIComponent(keyword)
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "HTTP "+response.status
+      );
+
+    }
+
+
+    const json=
+      await response.json();
+
+
+    if(
+      !json.success ||
+      !Array.isArray(json.data) ||
+      json.data.length===0
+    ){
+
+      result.innerHTML=`
+        <div class="result-card">
+
+          <div class="stock-name">
+            😢 ${
+              language==="zh"
+              ?"找不到股票"
+              :"Stock not found"
+            }
+          </div>
+
+          <div class="small"
+               style="margin-top:10px;">
+
+            ${
+              language==="zh"
+              ?"找不到「"+escapeHTML(keyword)+"」，請確認股票代號或公司名稱。"
+              :"No result for \""+escapeHTML(keyword)+"\". Please check the code or company name."
+            }
+
+          </div>
+
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    /*
+      如果搜尋名稱出現多筆，
+      優先找完全符合代號或名稱的股票。
+    */
+
+    let stock=
+      json.data.find(function(item){
+
+        return (
+          String(item.code).trim()===keyword ||
+          String(item.name).trim()===keyword ||
+          String(item.fullName).trim()===keyword
+        );
+
+      });
+
+
+    if(!stock){
+
+      stock=json.data[0];
+
+    }
+
+
+    const code=
+      escapeHTML(stock.code || "");
+
+    const name=
+      escapeHTML(stock.name || "");
+
+    const market=
+      escapeHTML(stock.market || "－");
+
+    const industry=
+      escapeHTML(stock.industry || "資料未提供");
+
+    const fullName=
+      escapeHTML(stock.fullName || "");
+
+
+    result.innerHTML=`
+
+      <div class="result-card">
+
+        <div class="stock-header">
+
+          <div>
+
+            <div class="stock-name">
+              🏢 ${code} ${name}
+            </div>
+
+            <div class="small"
+                 style="margin-top:5px;">
+              ${fullName}
+            </div>
+
+          </div>
+
+
+          <div class="market-badge">
+
+            ${
+              market==="上市"
+              ?"📈 "
+              :market==="上櫃"
+              ?"💹 "
+              :"🏢 "
+            }
+
+            ${market}
+
+          </div>
+
+        </div>
+
+
+        <div class="stock-info">
+
+          <strong>
+            ${
+              language==="zh"
+              ?"🏭 產業："
+              :"🏭 Industry: "
+            }
+          </strong>
+
+          ${industry}
+
+        </div>
+
+
+        <div class="status">
+
+          ${
+            language==="zh"
+            ?"✅ 已成功從上市／上櫃資料找到這家公司。"
+            :"✅ Company successfully found in TWSE / TPEx data."
+          }
+
+        </div>
+
+
+        <div style="
+          margin-top:18px;
+          padding-top:16px;
+          border-top:1px solid #edf2f7;
+        ">
+
+          <strong>
+
+            ${
+              language==="zh"
+              ?"🌍 國際事件影響分析"
+              :"🌍 Global Event Impact"
+            }
+
+          </strong>
+
+
+          <div class="small"
+               style="margin-top:8px;">
+
+            ${
+              language==="zh"
+              ?"🚧 下一階段功能：我們會把這家公司與 Trump Watch、國際新聞及影響類股連結起來。"
+              :"🚧 Next step: connect this company with Trump Watch, global news and affected sectors."
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    result.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+
+  }catch(error){
+
+    console.error(
+      "股票搜尋錯誤：",
+      error
+    );
+
+
+    result.innerHTML=`
+
+      <div class="result-card">
+
+        <div class="stock-name">
+          ⚠️ ${
+            language==="zh"
+            ?"股票資料暫時無法取得"
+            :"Unable to load stock data"
+          }
+        </div>
+
+
+        <div class="small"
+             style="margin-top:10px;">
+
+          ${
+            language==="zh"
+            ?"請稍後再試。如果 /api/stocks 可以正常顯示資料，請檢查 Vercel 是否已部署最新的 index.html。"
+            :"Please try again later. If /api/stocks works, check whether Vercel has deployed the latest index.html."
+          }
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* 防止 API 文字直接插入 HTML */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
 
 </script>
 
