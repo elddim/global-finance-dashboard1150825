@@ -544,6 +544,7 @@ main{
 .tag{
   display:inline-block;
   width:max-content;
+  max-width:100%;
   padding:5px 10px;
   border-radius:20px;
   background:#eff6ff;
@@ -577,18 +578,10 @@ main{
 
 .trump-header-row{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-bottom:12px;
-}
-
-.trump-header-left{
-  display:flex;
   align-items:center;
   gap:9px;
   flex-wrap:wrap;
+  margin-bottom:12px;
 }
 
 .trump-days{
@@ -884,7 +877,7 @@ footer{
 
 
 <!-- =========================================
-     今日市場重點
+     今日重點
 ========================================= -->
 
 <h2
@@ -899,11 +892,7 @@ footer{
 
 <div class="daily-header">
 
-<div
-  class="daily-title"
-  data-zh="💡 今天投資市場在看什麼？"
-  data-en="💡 What is the market watching today?"
->
+<div class="daily-title">
 💡 今天投資市場在看什麼？
 </div>
 
@@ -912,7 +901,6 @@ TODAY
 </div>
 
 </div>
-
 
 <div id="dailySummary">
 
@@ -1016,7 +1004,7 @@ TODAY
 </div>
 
 <div class="search-description">
-輸入股票代號或公司名稱，查看產業、可能影響主題，以及與這檔股票可能相關的最近 3 天國際財經新聞。
+輸入股票代號或公司名稱，查看公司產業、可能影響主題，以及與這檔股票可能相關的最近 3 天國際財經新聞。
 </div>
 
 
@@ -1051,7 +1039,7 @@ TODAY
 
 
 <!-- =========================================
-     財經新聞
+     國際新聞
 ========================================= -->
 
 <h2
@@ -1086,8 +1074,6 @@ TODAY
 
 <div class="trump-header-row">
 
-<div class="trump-header-left">
-
 <h2
   class="section-title"
   id="trump"
@@ -1099,8 +1085,6 @@ TODAY
 <span class="trump-days">
 最近 3 天
 </span>
-
-</div>
 
 </div>
 
@@ -1128,14 +1112,17 @@ TODAY
 
 <div class="trump-warning">
 
-⚠️ Truth Social 官方來源目前可能阻擋 Vercel，
-因此網站可能使用 Trump's Truth RSS 公開備援來源。
-部分內容可能是 Trump 的轉貼、連結分享或無文字貼文。
+⚠️ Truth Social 官方來源若無法由 Vercel 取得，網站會使用公開備援來源。
+部分內容可能屬於 Trump 的轉貼、外部文章分享或連結貼文。
 
 </div>
 
 </section>
 
+
+<!-- =========================================
+     免責
+========================================= -->
 
 <div class="notice">
 
@@ -1145,9 +1132,9 @@ TODAY
 
 <br><br>
 
-市場價格、匯率、新聞與社群資訊可能存在延遲。
-今日重點、注意類股、股票與新聞關聯及潛在影響方向均採規則式整理，
-僅供資訊、學習與研究使用，不構成買賣建議或股價預測。
+市場價格、匯率、新聞及社群資訊可能存在延遲。
+今日市場重點、注意類股、新聞關聯與潛在方向皆為規則式整理，
+僅供學習、研究及市場觀察使用，不構成任何投資建議或股價預測。
 
 </div>
 
@@ -1201,10 +1188,9 @@ function updateTime(){
   document
     .getElementById("updated")
     .textContent=
-
-    language==="zh"
-    ?"🕒 網頁時間："+now.toLocaleString("zh-TW")
-    :"🕒 Page time: "+now.toLocaleString("en-US");
+      language==="zh"
+      ?"🕒 網頁時間："+now.toLocaleString("zh-TW")
+      :"🕒 Page time: "+now.toLocaleString("en-US");
 
 }
 
@@ -1233,15 +1219,6 @@ function toggleLanguage(){
         :el.dataset.en;
 
     });
-
-
-  document
-    .getElementById("stockInput")
-    .placeholder=
-
-    language==="zh"
-    ?"例如：2330、台積電、2454、聯發科"
-    :"Example: 2330, TSMC, 2454, MediaTek";
 
 
   updateTime();
@@ -1329,7 +1306,7 @@ function renderDailySummary(){
         "通膨",
         "美元"
       ],
-      desc:"利率與通膨預期可能影響美元、美債、金融股與科技股的資金流向。",
+      desc:"利率與通膨預期可能影響美元、美債、金融與科技股的資金流向。",
       sectors:"金融、科技、高股息、債券"
     },
 
@@ -1456,9 +1433,7 @@ function renderDailySummary(){
         </div>
 
         <div class="daily-description">
-
           ${escapeHTML(item.desc)}
-
         </div>
 
         <div class="daily-sectors">
@@ -1493,16 +1468,11 @@ function renderDailySummary(){
 
 
   let html=
-    firstItems
-    .map(function(item,index){
+    firstItems.map(function(item,index){
 
-      return renderItem(
-        item,
-        index
-      );
+      return renderItem(item,index);
 
-    })
-    .join("");
+    }).join("");
 
 
   if(moreItems.length>0){
@@ -1515,17 +1485,14 @@ function renderDailySummary(){
           ＋ 展開全部重點
         </summary>
 
-        ${moreItems
-          .map(function(item,index){
+        ${moreItems.map(function(item,index){
 
-            return renderItem(
-              item,
-              index+2
-            );
+          return renderItem(
+            item,
+            index+2
+          );
 
-          })
-          .join("")
-        }
+        }).join("")}
 
       </details>
 
@@ -1534,14 +1501,13 @@ function renderDailySummary(){
   }
 
 
-  box.innerHTML=
-    html;
+  box.innerHTML=html;
 
 }
 
 
 /* =========================================
-   MARKET
+   MARKET API
 ========================================= */
 
 async function loadMarket(){
@@ -1614,7 +1580,10 @@ async function loadMarket(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Market error:",
+      error
+    );
 
 
     document
@@ -1632,10 +1601,7 @@ async function loadMarket(){
 }
 
 
-function switchMarket(
-  category,
-  button
-){
+function switchMarket(category,button){
 
   currentMarketCategory=
     category;
@@ -1686,7 +1652,6 @@ function renderMarket(){
   grid.innerHTML=
 
     items.map(function(item){
-
 
       let changeHTML="";
 
@@ -1827,14 +1792,15 @@ async function loadNews(){
     document
       .getElementById("newsStatus")
       .textContent=
-
-      "✅ 最近 3 天更新："+
-      formatDateTime(json.updatedAt);
+        "✅ 最近 3 天更新："+formatDateTime(json.updatedAt);
 
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "News error:",
+      error
+    );
 
 
     document
@@ -1941,7 +1907,7 @@ function renderGlobalNews(){
 
 
 /* =========================================
-   Trump
+   TRUMP
 ========================================= */
 
 function cleanTrumpText(value){
@@ -1961,22 +1927,6 @@ function cleanTrumpText(value){
   }
 
 
-  /*
-    修正常見 RSS 把網址切開的問題
-  */
-
-  text=
-    text
-    .replace(
-      /https:\/\/\s+/gi,
-      "https://"
-    )
-    .replace(
-      /http:\/\/\s+/gi,
-      "http://"
-    );
-
-
   return text;
 
 }
@@ -1990,15 +1940,7 @@ function getTrumpType(text){
 
 
   if(
-    lower.startsWith("rt:")
-  ){
-
-    return "🔁 轉貼";
-
-  }
-
-
-  if(
+    lower.startsWith("rt:") ||
     lower.startsWith("rt @")
   ){
 
@@ -2040,14 +1982,12 @@ function renderTrumpPosts(){
 
       const raw=
         cleanTrumpText(
-
           item.fullText ||
           item.excerpt ||
           item.description ||
           item.content ||
           item.title ||
           ""
-
         );
 
 
@@ -2058,10 +1998,6 @@ function renderTrumpPosts(){
 
     })
     .filter(function(item){
-
-      /*
-        把完全沒有內容的 [No Title] 卡片移掉
-      */
 
       return Boolean(
         item.cleanText
@@ -2092,7 +2028,6 @@ function renderTrumpPosts(){
     cleanedPosts
     .slice(0,9)
     .map(function(item){
-
 
       const raw=
         item.cleanText;
@@ -2129,12 +2064,7 @@ function renderTrumpPosts(){
         :"Truth Social 官方來源";
 
 
-      /*
-        如果只是 RT + URL，
-        不需要再顯示相同的完整文字
-      */
-
-      const isOnlyLink=
+      const isOnlyRTLink=
         /^RT:\s*https?:\/\//i.test(raw);
 
 
@@ -2172,7 +2102,7 @@ function renderTrumpPosts(){
           <div class="trump-short">
 
             ${
-              isOnlyLink
+              isOnlyRTLink
               ?"Trump 轉貼了一則 Truth Social 貼文。"
               :`“${escapeHTML(short)}”`
             }
@@ -2182,23 +2112,20 @@ function renderTrumpPosts(){
 
           <div class="trump-meta">
 
-            🕒 ${formatDateTime(
-              item.publishedAt
-            )}
+            🕒
+            ${formatDateTime(item.publishedAt)}
 
           </div>
 
 
           <div class="trump-source">
-
             ${sourceLabel}
-
           </div>
 
 
           ${
             raw.length>145 &&
-            !isOnlyLink
+            !isOnlyRTLink
             ?`
 
               <details class="trump-details">
@@ -2235,19 +2162,17 @@ function renderTrumpPosts(){
             :""
           }
 
-
         </article>
 
       `;
 
-    })
-    .join("");
+    }).join("");
 
 }
 
 
 /* =========================================
-   股票產業
+   股票產業規則
 ========================================= */
 
 function getIndustryImpact(industry){
@@ -2440,7 +2365,7 @@ function getIndustryImpact(industry){
 
 
 /* =========================================
-   相關新聞
+   股票相關新聞
 ========================================= */
 
 function findRelatedNews(
@@ -2521,11 +2446,26 @@ function findRelatedNews(
     item=>item.relevanceScore>0
   )
 
-  .sort(
-    (a,b)=>
-      b.relevanceScore-
-      a.relevanceScore
-  )
+  .sort(function(a,b){
+
+    if(
+      b.relevanceScore!==a.relevanceScore
+    ){
+
+      return(
+        b.relevanceScore-
+        a.relevanceScore
+      );
+
+    }
+
+
+    return(
+      Number(b.timestamp||0)-
+      Number(a.timestamp||0)
+    );
+
+  })
 
   .slice(0,5);
 
@@ -2596,21 +2536,21 @@ function detectDirection(text){
 
 
 /* =========================================
-   股票搜尋
+   股票搜尋 - 容錯完整版
 ========================================= */
 
 async function searchStock(){
 
   const keyword=
     document
-    .getElementById("stockInput")
-    .value
-    .trim();
+      .getElementById("stockInput")
+      .value
+      .trim();
 
 
   const result=
     document
-    .getElementById("stockResult");
+      .getElementById("stockResult");
 
 
   if(!keyword){
@@ -2631,13 +2571,20 @@ async function searchStock(){
   result.innerHTML=`
 
     <div class="loading">
-      🪙 正在分析股票...
+
+      <span class="coin">
+        🪙
+      </span>
+
+      正在搜尋股票...
+
     </div>
 
   `;
 
 
   try{
+
 
     const response=
       await fetch(
@@ -2646,20 +2593,102 @@ async function searchStock(){
       );
 
 
+    if(!response.ok){
+
+      throw new Error(
+        "HTTP "+response.status
+      );
+
+    }
+
+
     const json=
       await response.json();
 
 
+    console.log(
+      "股票 API 回傳：",
+      json
+    );
+
+
+    /*
+      相容多種 API 格式
+    */
+
+    let stocks=[];
+
+
     if(
-      !json.success ||
-      !Array.isArray(json.data) ||
-      json.data.length===0
+      Array.isArray(json.data)
+    ){
+
+      stocks=
+        json.data;
+
+    }
+
+
+    else if(
+      Array.isArray(json.results)
+    ){
+
+      stocks=
+        json.results;
+
+    }
+
+
+    else if(
+      Array.isArray(json.stocks)
+    ){
+
+      stocks=
+        json.stocks;
+
+    }
+
+
+    else if(
+      Array.isArray(json)
+    ){
+
+      stocks=
+        json;
+
+    }
+
+
+    else if(
+      json.data &&
+      typeof json.data==="object"
+    ){
+
+      stocks=[
+        json.data
+      ];
+
+    }
+
+
+    if(
+      json.success===false ||
+      stocks.length===0
     ){
 
       result.innerHTML=`
 
         <div class="result-card">
-          😢 找不到這檔股票
+
+          😢 找不到「${escapeHTML(keyword)}」
+
+          <div
+            class="small"
+            style="margin-top:8px;"
+          >
+            請試股票代號，例如 2330、2454。
+          </div>
+
         </div>
 
       `;
@@ -2669,8 +2698,68 @@ async function searchStock(){
     }
 
 
+    /*
+      欄位標準化
+    */
+
+    const normalized=
+      stocks.map(function(item){
+
+        return{
+
+          original:item,
+
+          code:
+            item.code ||
+            item.Code ||
+            item.stockCode ||
+            item.StockCode ||
+            item.symbol ||
+            "",
+
+          name:
+            item.name ||
+            item.Name ||
+            item.stockName ||
+            item.StockName ||
+            item.company ||
+            "",
+
+          fullName:
+            item.fullName ||
+            item.FullName ||
+            item.companyName ||
+            item.CompanyName ||
+            item.name ||
+            item.Name ||
+            "",
+
+          market:
+            item.market ||
+            item.Market ||
+            item.marketName ||
+            item.listingMarket ||
+            "",
+
+          industry:
+            item.industry ||
+            item.Industry ||
+            item.industryName ||
+            item.IndustryName ||
+            item.industryZh ||
+            "其他"
+
+        };
+
+      });
+
+
+    /*
+      精準比對
+    */
+
     let stock=
-      json.data.find(function(item){
+      normalized.find(function(item){
 
         return(
 
@@ -2689,10 +2778,40 @@ async function searchStock(){
       });
 
 
+    /*
+      部分名稱比對
+    */
+
     if(!stock){
 
       stock=
-        json.data[0];
+        normalized.find(function(item){
+
+          return(
+
+            String(item.name)
+            .includes(keyword)
+
+            ||
+
+            String(item.fullName)
+            .includes(keyword)
+
+          );
+
+        });
+
+    }
+
+
+    /*
+      最後 fallback 第一筆
+    */
+
+    if(!stock){
+
+      stock=
+        normalized[0];
 
     }
 
@@ -2723,30 +2842,49 @@ async function searchStock(){
 
               🏢
               ${escapeHTML(stock.code)}
+
               ${escapeHTML(stock.name)}
 
             </div>
 
-            <div class="small">
-
-              ${escapeHTML(stock.fullName||"")}
-
-            </div>
-
-          </div>
-
-
-          <div class="market-badge">
 
             ${
-              stock.market==="上市"
-              ?"📈"
-              :"💹"
+              stock.fullName &&
+              stock.fullName!==stock.name
+
+              ?`
+
+                <div class="small">
+                  ${escapeHTML(stock.fullName)}
+                </div>
+
+              `
+              :""
             }
 
-            ${escapeHTML(stock.market)}
-
           </div>
+
+
+          ${
+            stock.market
+            ?`
+
+              <div class="market-badge">
+
+                ${
+                  String(stock.market)
+                  .includes("上市")
+                  ?"📈"
+                  :"💹"
+                }
+
+                ${escapeHTML(stock.market)}
+
+              </div>
+
+            `
+            :""
+          }
 
         </div>
 
@@ -2757,7 +2895,10 @@ async function searchStock(){
             🏭 產業：
           </strong>
 
-          ${escapeHTML(stock.industry)}
+          ${escapeHTML(
+            stock.industry ||
+            "其他"
+          )}
 
         </div>
 
@@ -2821,7 +2962,9 @@ async function searchStock(){
         </div>
 
 
-        ${renderRelatedNews(relatedNews)}
+        ${renderRelatedNews(
+          relatedNews
+        )}
 
       </div>
 
@@ -2830,13 +2973,29 @@ async function searchStock(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "股票搜尋失敗：",
+      error
+    );
 
 
     result.innerHTML=`
 
       <div class="result-card">
-        ⚠️ 股票分析暫時無法取得
+
+        ⚠️ 股票搜尋失敗
+
+        <div
+          class="small"
+          style="margin-top:8px;"
+        >
+
+          ${escapeHTML(
+            error.message
+          )}
+
+        </div>
+
       </div>
 
     `;
@@ -2869,7 +3028,9 @@ function renderRelatedNews(items){
           class="small"
           style="margin-top:10px;"
         >
+
           目前沒有找到明顯相關新聞。
+
         </div>
 
       </div>
@@ -2898,7 +3059,9 @@ function renderRelatedNews(items){
           "watch";
 
 
-        if(item.direction==="positive"){
+        if(
+          item.direction==="positive"
+        ){
 
           direction=
             "🟢 潛在正向";
@@ -2909,7 +3072,9 @@ function renderRelatedNews(items){
         }
 
 
-        if(item.direction==="negative"){
+        if(
+          item.direction==="negative"
+        ){
 
           direction=
             "🔴 潛在負向";
@@ -2930,7 +3095,9 @@ function renderRelatedNews(items){
 
             <div class="news-title">
 
-              ${escapeHTML(item.title)}
+              ${escapeHTML(
+                item.title
+              )}
 
             </div>
 
@@ -2940,7 +3107,10 @@ function renderRelatedNews(items){
               <span class="tag">
 
                 📰
-                ${escapeHTML(item.source||"News")}
+                ${escapeHTML(
+                  item.source ||
+                  "News"
+                )}
 
               </span>
 
@@ -2965,7 +3135,9 @@ function renderRelatedNews(items){
             <div class="news-date">
 
               🕒
-              ${formatDateTime(item.publishedAt)}
+              ${formatDateTime(
+                item.publishedAt
+              )}
 
             </div>
 
@@ -3001,7 +3173,7 @@ function renderRelatedNews(items){
 
 
 /* =========================================
-   市場格式
+   MARKET FORMAT
 ========================================= */
 
 function formatMarketValue(item){
@@ -3043,7 +3215,9 @@ function formatMarketValue(item){
   }
 
 
-  if(item.id==="bitcoin-twd"){
+  if(
+    item.id==="bitcoin-twd"
+  ){
 
     return "NT$ "+
       value.toLocaleString(
@@ -3056,7 +3230,9 @@ function formatMarketValue(item){
   }
 
 
-  if(item.id==="gold"){
+  if(
+    item.id==="gold"
+  ){
 
     return "$"+
       value.toLocaleString(
@@ -3070,7 +3246,9 @@ function formatMarketValue(item){
   }
 
 
-  if(item.id==="gold-twd-gram"){
+  if(
+    item.id==="gold-twd-gram"
+  ){
 
     return "NT$ "+
       value.toLocaleString(
@@ -3095,7 +3273,7 @@ function formatMarketValue(item){
 
 
 /* =========================================
-   日期
+   DATE
 ========================================= */
 
 function formatDateTime(value){
@@ -3110,7 +3288,9 @@ function formatDateTime(value){
 
 
   if(
-    Number.isNaN(date.getTime())
+    Number.isNaN(
+      date.getTime()
+    )
   ){
 
     return String(value);
