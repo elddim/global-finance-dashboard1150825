@@ -2,30 +2,43 @@
   🌍💰 國際財經情報站
   api/news.js
 
-  功能：
+  功能
   1. 最近 3 天國際財經新聞
-  2. 最近 3 天 Trump 本人 Truth Social 發文
-  3. 不再顯示 Trump 財經媒體新聞
-  4. 免費、不需要 API Key
+  2. 最近 3 天 Donald J. Trump 本人 Truth Social 公開貼文
+  3. Trump 貼文優先直接讀取 Truth Social 公開 Mastodon API
+  4. 抓不到 Trump API 時，不拿媒體新聞冒充本人發言
+  5. 免費、不需要 API Key
 */
 
 
-/* ========================================
-   基本工具
-======================================== */
+/* =========================================
+   共用
+========================================= */
 
 function decodeEntities(text = "") {
 
   return String(text)
+
     .replace(/<!\[CDATA\[(.*?)\]\]>/gs, "$1")
+
     .replace(/&amp;/g, "&")
+
     .replace(/&quot;/g, '"')
+
     .replace(/&#39;/g, "'")
+
     .replace(/&apos;/g, "'")
+
     .replace(/&lt;/g, "<")
+
     .replace(/&gt;/g, ">")
+
+    .replace(/&nbsp;/g, " ")
+
     .replace(/&#x27;/g, "'")
+
     .replace(/&#x2F;/g, "/")
+
     .trim();
 
 }
@@ -34,50 +47,88 @@ function decodeEntities(text = "") {
 function stripHTML(text = "") {
 
   return decodeEntities(
+
     String(text)
+
+      .replace(/<br\s*\/?>/gi, "\n")
+
+      .replace(/<\/p>/gi, "\n")
+
       .replace(/<[^>]*>/g, " ")
-      .replace(/\s+/g, " ")
+
+      .replace(/[ \t]+/g, " ")
+
+      .replace(/\n\s+/g, "\n")
+
+      .replace(/\n{3,}/g, "\n\n")
+
   ).trim();
 
 }
 
 
-function getTag(item, tagName) {
+async function fetchJSON(
+  url,
+  options = {}
+) {
 
-  const regex =
-    new RegExp(
-      `<${tagName}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tagName}>`,
-      "i"
+  const response =
+    await fetch(
+      url,
+      {
+        ...options,
+
+        headers: {
+
+          Accept:
+            "application/json",
+
+          "User-Agent":
+            "Mozilla/5.0 GlobalFinanceDashboard/1.0",
+
+          ...(options.headers || {})
+
+        }
+
+      }
     );
 
-  const match =
-    item.match(regex);
 
-  return match
-    ? decodeEntities(match[1])
-    : "";
+  if (!response.ok) {
+
+    throw new Error(
+      `${url} HTTP ${response.status}`
+    );
+
+  }
+
+
+  return await response.json();
 
 }
 
 
-/* ========================================
+/* =========================================
    最近 3 天
-======================================== */
+========================================= */
 
-function isRecent(item, days = 3) {
+function isRecentDate(
+  value,
+  days = 3
+) {
 
   const timestamp =
-    Number(
-      item.timestamp ||
-      Date.parse(item.publishedAt)
-    );
+    Date.parse(value);
+
 
   if (!timestamp) {
     return false;
   }
 
+
   const now =
     Date.now();
+
 
   const maxAge =
     days *
@@ -85,6 +136,7 @@ function isRecent(item, days = 3) {
     60 *
     60 *
     1000;
+
 
   return (
     timestamp <= now &&
@@ -94,16 +146,43 @@ function isRecent(item, days = 3) {
 }
 
 
-/* ========================================
-   RSS 解析
-======================================== */
+/* =========================================
+   RSS
+========================================= */
 
-function parseRSS(xml, type) {
+function getTag(
+  item,
+  tagName
+) {
+
+  const regex =
+    new RegExp(
+      `<${tagName}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tagName}>`,
+      "i"
+    );
+
+
+  const match =
+    item.match(regex);
+
+
+  return match
+    ? decodeEntities(match[1])
+    : "";
+
+}
+
+
+function parseRSS(
+  xml,
+  type
+) {
 
   const items =
     xml.match(
       /<item>[\s\S]*?<\/item>/gi
     ) || [];
+
 
   return items.map(
     (item, index) => {
@@ -116,6 +195,7 @@ function parseRSS(xml, type) {
           )
         );
 
+
       const link =
         stripHTML(
           getTag(
@@ -124,6 +204,7 @@ function parseRSS(xml, type) {
           )
         );
 
+
       const pubDate =
         stripHTML(
           getTag(
@@ -131,6 +212,7 @@ function parseRSS(xml, type) {
             "pubDate"
           )
         );
+
 
       let source =
         stripHTML(
@@ -146,6 +228,7 @@ function parseRSS(xml, type) {
         const parts =
           title.split(" - ");
 
+
         if (parts.length > 1) {
 
           source =
@@ -153,9 +236,12 @@ function parseRSS(xml, type) {
               parts.length - 1
             ];
 
+
           title =
             parts
+
               .slice(0, -1)
+
               .join(" - ");
 
         }
@@ -194,10 +280,6 @@ function parseRSS(xml, type) {
 }
 
 
-/* ========================================
-   Google News RSS
-======================================== */
-
 function buildFeedURL(
   query,
   language
@@ -231,10 +313,6 @@ function buildFeedURL(
 }
 
 
-/* ========================================
-   抓 RSS
-======================================== */
-
 async function fetchFeed(
   query,
   language,
@@ -247,25 +325,25 @@ async function fetchFeed(
       language
     );
 
+
   const response =
     await fetch(
       url,
       {
         headers: {
 
-          "User-Agent":
-            "Mozilla/5.0 GlobalFinanceDashboard/1.0",
+          Accept:
+            "application/rss+xml,text/xml",
 
-          "Accept":
-            "application/rss+xml,text/xml"
+          "User-Agent":
+            "Mozilla/5.0 GlobalFinanceDashboard/1.0"
 
         }
       }
     );
 
-  if (
-    !response.ok
-  ) {
+
+  if (!response.ok) {
 
     throw new Error(
       `${type} RSS HTTP ${response.status}`
@@ -273,8 +351,10 @@ async function fetchFeed(
 
   }
 
+
   const xml =
     await response.text();
+
 
   return parseRSS(
     xml,
@@ -284,36 +364,44 @@ async function fetchFeed(
 }
 
 
-/* ========================================
-   去除重複
-======================================== */
+/* =========================================
+   去除新聞重複
+========================================= */
 
-function removeDuplicates(news) {
+function removeDuplicates(items) {
 
   const seen =
     new Set();
 
-  return news.filter(
+
+  return items.filter(
     item => {
 
       const key =
         String(
           item.title ||
+          item.excerpt ||
           ""
         )
+
           .toLowerCase()
+
           .replace(/\s+/g, " ")
+
           .trim();
+
 
       if (!key) {
         return false;
       }
+
 
       if (
         seen.has(key)
       ) {
         return false;
       }
+
 
       seen.add(key);
 
@@ -325,9 +413,9 @@ function removeDuplicates(news) {
 }
 
 
-/* ========================================
-   國際財經新聞
-======================================== */
+/* =========================================
+   全球財經新聞
+========================================= */
 
 async function getGlobalNews(
   language
@@ -336,23 +424,34 @@ async function getGlobalNews(
   const query =
     language === "en"
 
-    ? [
-        "global economy",
-        "stock market",
-        "Federal Reserve",
-        "AI semiconductor",
-        "oil",
-        "gold"
-      ].join(" OR ")
+      ? [
 
-    : [
-        "國際財經",
-        "全球股市",
-        "美國聯準會",
-        "AI 半導體",
-        "黃金",
-        "原油"
-      ].join(" OR ");
+          "global economy when:3d",
+
+          "stock market when:3d",
+
+          "Federal Reserve when:3d",
+
+          "AI semiconductor when:3d",
+
+          "gold oil when:3d"
+
+        ].join(" OR ")
+
+
+      : [
+
+          "國際財經 when:3d",
+
+          "全球股市 when:3d",
+
+          "美國聯準會 when:3d",
+
+          "AI 半導體 when:3d",
+
+          "黃金 原油 when:3d"
+
+        ].join(" OR ");
 
 
   const items =
@@ -367,8 +466,8 @@ async function getGlobalNews(
 
     .filter(
       item =>
-        isRecent(
-          item,
+        isRecentDate(
+          item.publishedAt,
           3
         )
     )
@@ -387,124 +486,173 @@ async function getGlobalNews(
 }
 
 
-/* ========================================
-   Trump 本人 Truth Social
-======================================== */
+/* =========================================
+   Trump Truth Social
+========================================= */
 
 async function getTrumpPosts() {
 
   /*
-    免費做法：
-    用 Google News 搜尋可索引到的
-    Truth Social @realDonaldTrump 原始貼文頁。
+    Truth Social 是 Mastodon 相容架構。
 
-    注意：
-    這不是 Truth Social 官方 API，
-    所以可能偶爾抓不到。
+    第一步：
+    先利用帳號名稱取得 account id。
 
-    若抓不到，就回傳空陣列，
-    不會拿媒體新聞冒充本人發言。
+    account lookup 若臨時失敗，
+    再使用已知 public account id 當 fallback。
   */
 
-  const queries = [
-
-    'site:truthsocial.com/@realDonaldTrump/posts "Donald J. Trump" when:3d',
-
-    'site:truthsocial.com/@realDonaldTrump/posts Trump when:3d',
-
-    'site:truthsocial.com/@realDonaldTrump/posts tariff OR trade OR economy when:3d'
-
-  ];
+  let accountId =
+    "107780257626128497";
 
 
-  const results =
-    await Promise.allSettled(
+  try {
 
-      queries.map(
-        query =>
-          fetchFeed(
-            query,
-            "en",
-            "trump-post"
-          )
-      )
+    const account =
+      await fetchJSON(
+
+        "https://truthsocial.com/api/v1/accounts/lookup?acct=realDonaldTrump"
+
+      );
+
+
+    if (
+      account &&
+      account.id
+    ) {
+
+      accountId =
+        account.id;
+
+    }
+
+  } catch (error) {
+
+    console.warn(
+      "Truth Social account lookup failed:",
+      error.message
+    );
+
+  }
+
+
+  /*
+    直接取得本人最近公開 statuses。
+
+    limit 40：
+    因為 Trump 有時一天會發很多篇，
+    再由程式端過濾最近 3 天。
+  */
+
+  const statuses =
+    await fetchJSON(
+
+      `https://truthsocial.com/api/v1/accounts/${encodeURIComponent(accountId)}/statuses?limit=40&exclude_replies=true`
 
     );
 
 
-  let allItems = [];
+  if (
+    !Array.isArray(statuses)
+  ) {
+
+    throw new Error(
+      "Truth Social statuses 回傳格式錯誤"
+    );
+
+  }
 
 
-  results.forEach(
-    result => {
-
-      if (
-        result.status ===
-        "fulfilled"
-      ) {
-
-        allItems.push(
-          ...result.value
-        );
-
-      }
-
-    }
-  );
-
-
-  const filtered =
-    removeDuplicates(allItems)
+  const posts =
+    statuses
 
       .filter(
-        item =>
-          isRecent(
-            item,
+        status => {
+
+          /*
+            reblog 不算本人原始發文
+          */
+
+          if (
+            status.reblog
+          ) {
+            return false;
+          }
+
+
+          return isRecentDate(
+            status.created_at,
             3
-          )
-      )
-
-      .filter(
-        item => {
-
-          const link =
-            String(
-              item.link ||
-              ""
-            )
-              .toLowerCase();
-
-
-          const title =
-            String(
-              item.title ||
-              ""
-            )
-              .toLowerCase();
-
-
-          return (
-
-            link.includes(
-              "truthsocial.com"
-            )
-
-            ||
-
-            title.includes(
-              "truth social"
-            )
-
-            ||
-
-            title.includes(
-              "donald j. trump"
-            )
-
           );
 
         }
       )
+
+      .map(
+        status => {
+
+
+          const fullText =
+            stripHTML(
+              status.content ||
+              ""
+            );
+
+
+          /*
+            空白、純圖片貼文不直接顯示成假文字
+          */
+
+          if (!fullText) {
+
+            return null;
+
+          }
+
+
+          return {
+
+            id:
+              status.id,
+
+            platform:
+              "Truth Social",
+
+            author:
+              "Donald J. Trump",
+
+            /*
+              這次是真正的 status.content
+              轉成純文字。
+            */
+
+            excerpt:
+              fullText,
+
+            fullText,
+
+            publishedAt:
+              status.created_at,
+
+            timestamp:
+              Date.parse(
+                status.created_at
+              ) || 0,
+
+            link:
+              status.url ||
+              status.uri ||
+              "",
+
+            verifiedOriginal:
+              true
+
+          };
+
+        }
+      )
+
+      .filter(Boolean)
 
       .sort(
         (a, b) =>
@@ -514,58 +662,18 @@ async function getTrumpPosts() {
 
       .slice(
         0,
-        6
+        10
       );
 
 
-  return filtered.map(
-    item => ({
-
-      id:
-        item.id,
-
-      platform:
-        "Truth Social",
-
-      author:
-        "Donald J. Trump",
-
-      /*
-        這裡只當作搜尋結果摘錄，
-        不宣稱是完整貼文全文。
-      */
-
-      excerpt:
-        item.title,
-
-      publishedAt:
-        item.publishedAt,
-
-      link:
-        item.link,
-
-      timestamp:
-        item.timestamp,
-
-      verifiedOriginal:
-        String(
-          item.link ||
-          ""
-        )
-          .toLowerCase()
-          .includes(
-            "truthsocial.com"
-          )
-
-    })
-  );
+  return posts;
 
 }
 
 
-/* ========================================
-   Vercel API
-======================================== */
+/* =========================================
+   Vercel
+========================================= */
 
 export default async function handler(
   req,
@@ -576,27 +684,22 @@ export default async function handler(
 
     const language =
       req.query.lang === "en"
-      ? "en"
-      : "zh";
+        ? "en"
+        : "zh";
 
 
     /*
-      快取 5 分鐘
+      5 分鐘快取
     */
 
     res.setHeader(
+
       "Cache-Control",
+
       "s-maxage=300, stale-while-revalidate=900"
+
     );
 
-
-    /*
-      只抓：
-      1. 全球財經新聞
-      2. Trump 本人發文
-
-      已完全移除 Trump 財經媒體新聞
-    */
 
     const results =
       await Promise.allSettled([
@@ -617,10 +720,6 @@ export default async function handler(
     const warnings = [];
 
 
-/* ========================================
-   全球新聞
-======================================== */
-
     if (
       results[0].status ===
       "fulfilled"
@@ -638,10 +737,6 @@ export default async function handler(
 
     }
 
-
-/* ========================================
-   Trump 本人發文
-======================================== */
 
     if (
       results[1].status ===
@@ -661,9 +756,10 @@ export default async function handler(
     }
 
 
-/* ========================================
-   全部失敗
-======================================== */
+    /*
+      只要其中一種成功，
+      API 就正常回傳。
+    */
 
     if (
       globalNews.length === 0 &&
@@ -677,19 +773,19 @@ export default async function handler(
     }
 
 
-/* ========================================
-   回傳
-======================================== */
-
     return res
+
       .status(200)
+
       .json({
 
-        success: true,
+        success:
+          true,
 
         language,
 
-        windowDays: 3,
+        windowDays:
+          3,
 
         updatedAt:
           new Date().toISOString(),
@@ -706,26 +802,12 @@ export default async function handler(
         },
 
 
-        /*
-          最近 3 天國際財經新聞
-        */
-
         global:
           globalNews,
 
 
-        /*
-          最近 3 天 Trump 本人發文
-        */
+        trumpPosts,
 
-        trumpPosts:
-          trumpPosts,
-
-
-        /*
-          某一個免費來源抓不到時，
-          不讓整個 API 掛掉
-        */
 
         warnings
 
@@ -741,13 +823,16 @@ export default async function handler(
 
 
     return res
+
       .status(500)
+
       .json({
 
-        success: false,
+        success:
+          false,
 
         message:
-          "最近 3 天的新聞資料暫時無法取得",
+          "最近 3 天新聞資料暫時無法取得",
 
         error:
           error.message
