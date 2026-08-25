@@ -27,6 +27,10 @@ body{
   min-height:100vh;
 }
 
+a{
+  color:inherit;
+}
+
 header{
   background:linear-gradient(135deg,#38bdf8,#4f8cff,#34d399);
   color:white;
@@ -223,13 +227,6 @@ main{
   color:#936400;
 }
 
-.quote{
-  font-size:18px;
-  font-weight:800;
-  line-height:1.7;
-  margin:15px 0;
-}
-
 .small{
   color:#718096;
   font-size:13px;
@@ -384,17 +381,59 @@ main{
   font-size:13px;
 }
 
+.news-card{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.news-meta{
+  display:flex;
+  gap:7px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
 .news-title{
   font-size:16px;
   font-weight:900;
   line-height:1.6;
-  margin:8px 0;
 }
 
-.news-desc{
+.news-source{
   color:#64748b;
+  font-size:12px;
+}
+
+.news-date{
+  color:#94a3b8;
+  font-size:12px;
+}
+
+.news-link{
+  display:inline-block;
+  margin-top:auto;
+  text-decoration:none;
+  color:#2563eb;
+  font-weight:800;
   font-size:13px;
-  line-height:1.7;
+}
+
+.news-link:hover{
+  text-decoration:underline;
+}
+
+.trump-news-card{
+  background:white;
+  border-radius:15px;
+  padding:15px;
+  margin-top:12px;
+  border:1px solid #fde68a;
+}
+
+.trump-news-title{
+  font-weight:900;
+  line-height:1.6;
 }
 
 .money{
@@ -426,6 +465,25 @@ main{
   display:block;
   height:100%;
   background:linear-gradient(90deg,#34d399,#38bdf8);
+}
+
+.refresh-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+
+.refresh-btn{
+  border:0;
+  border-radius:20px;
+  background:#eef7ff;
+  color:#2563eb;
+  padding:8px 13px;
+  font-weight:800;
+  cursor:pointer;
 }
 
 .notice{
@@ -484,9 +542,9 @@ data-en="🌍💰 Global Finance Intelligence">
 </h1>
 
 <div class="subtitle"
-data-zh="全球市場 × Trump Watch × 台股搜尋 × 國際財經情報"
-data-en="Global Markets × Trump Watch × Taiwan Stocks × Financial Intelligence">
-全球市場 × Trump Watch × 台股搜尋 × 國際財經情報
+data-zh="全球市場 × Trump Watch × 台股搜尋 × 即時國際財經新聞"
+data-en="Global Markets × Trump Watch × Taiwan Stocks × Live Financial News">
+全球市場 × Trump Watch × 台股搜尋 × 即時國際財經新聞
 </div>
 
 </div>
@@ -501,6 +559,7 @@ data-en="Global Markets × Trump Watch × Taiwan Stocks × Financial Intelligenc
 
 </div>
 </header>
+
 
 <nav>
 <div class="nav-inner">
@@ -522,13 +581,14 @@ data-en="🔎 Stock Search">
 </button>
 
 <button onclick="goTo('news')"
-data-zh="📰 財經焦點"
-data-en="📰 Finance News">
-📰 財經焦點
+data-zh="📰 即時新聞"
+data-en="📰 Live News">
+📰 即時新聞
 </button>
 
 </div>
 </nav>
+
 
 <main>
 
@@ -542,29 +602,46 @@ data-en="💵 Global Market Snapshot">
 
 <div class="card market-card">
 <div class="market-name">🇺🇸 S&P 500</div>
-<div class="market-value">6,480.25</div>
-<div class="up">▲ +0.42%</div>
+<div class="market-value">展示資料</div>
+<div class="small"
+data-zh="即時行情下一階段串接"
+data-en="Live market data coming next">
+即時行情下一階段串接
+</div>
 </div>
 
 <div class="card market-card">
 <div class="market-name">🇺🇸 NASDAQ</div>
-<div class="market-value">21,530.80</div>
-<div class="up">▲ +0.66%</div>
+<div class="market-value">展示資料</div>
+<div class="small"
+data-zh="即時行情下一階段串接"
+data-en="Live market data coming next">
+即時行情下一階段串接
+</div>
 </div>
 
 <div class="card market-card">
 <div class="market-name">🇹🇼 Taiwan</div>
-<div class="market-value">24,110</div>
-<div class="down">▼ -0.18%</div>
+<div class="market-value">展示資料</div>
+<div class="small"
+data-zh="即時行情下一階段串接"
+data-en="Live market data coming next">
+即時行情下一階段串接
+</div>
 </div>
 
 <div class="card market-card">
 <div class="market-name">₿ Bitcoin</div>
-<div class="market-value">$112,300</div>
-<div class="up">▲ +1.20%</div>
+<div class="market-value">展示資料</div>
+<div class="small"
+data-zh="即時行情下一階段串接"
+data-en="Live market data coming next">
+即時行情下一階段串接
+</div>
 </div>
 
 </div>
+
 
 <h2 class="section-title" id="trump">
 🇺🇸 Trump Watch
@@ -575,60 +652,32 @@ data-en="💵 Global Market Snapshot">
 <div class="trump-top">
 
 <strong
-data-zh="🗣️ 最新財經政策動態"
-data-en="🗣️ Latest Economic Policy Update">
-🗣️ 最新財經政策動態
+data-zh="🗣️ 川普最新財經相關消息"
+data-en="🗣️ Latest Trump Finance News">
+🗣️ 川普最新財經相關消息
 </strong>
 
 <span class="tag tag-gold"
-data-zh="關稅 / 貿易"
-data-en="Tariffs / Trade">
-關稅 / 貿易
+data-zh="即時 RSS"
+data-en="Live RSS">
+即時 RSS
 </span>
 
 </div>
 
-<div class="quote"
-data-zh="涉及關稅、製造業、貿易、科技與金融市場的重要發言將顯示於此。"
-data-en="Important statements involving tariffs, manufacturing, trade, technology and financial markets will appear here.">
-涉及關稅、製造業、貿易、科技與金融市場的重要發言將顯示於此。
-</div>
+<div id="trumpNews">
 
-<div class="small"
-data-zh="⚠️ 目前為版面示範。之後將串接可靠新聞來源、日期及原始連結。"
-data-en="⚠️ Currently a prototype. Reliable news sources, dates and original links will be connected later.">
-⚠️ 目前為版面示範。之後將串接可靠新聞來源、日期及原始連結。
-</div>
-
-<div class="impact-grid">
-
-<div class="impact-box">
-💻 <strong data-zh="半導體" data-en="Semiconductors">半導體</strong>
-<br>
-🔴 <span data-zh="高度關注" data-en="High Attention">高度關注</span>
-</div>
-
-<div class="impact-box">
-🤖 AI
-<br>
-🟠 <span data-zh="中度影響" data-en="Medium Impact">中度影響</span>
-</div>
-
-<div class="impact-box">
-💵 <strong data-zh="美元" data-en="US Dollar">美元</strong>
-<br>
-🟡 <span data-zh="持續觀察" data-en="Watch">持續觀察</span>
-</div>
-
-<div class="impact-box">
-🇹🇼 <strong data-zh="台股" data-en="Taiwan Stocks">台股</strong>
-<br>
-🟠 <span data-zh="供應鏈關注" data-en="Supply Chain">供應鏈關注</span>
+<div class="loading">
+<span class="coin">🪙</span>
+<span data-zh=" 正在取得 Trump Watch..." data-en=" Loading Trump Watch...">
+ 正在取得 Trump Watch...
+</span>
 </div>
 
 </div>
 
 </div>
+
 
 <h2 class="section-title" id="stock"
 data-zh="🔎 上市・上櫃股票搜尋"
@@ -672,6 +721,7 @@ data-en="Search 🔎">
 <div id="stockResult"></div>
 
 </div>
+
 
 <h2 class="section-title"
 data-zh="💰 今日市場雷達"
@@ -725,63 +775,39 @@ data-en="⚠️ Global Risk Watch">
 
 </div>
 
+
 <h2 class="section-title" id="news"
-data-zh="📰 國際財經焦點"
-data-en="📰 Global Financial Focus">
-📰 國際財經焦點
+data-zh="📰 國際財經即時新聞"
+data-en="📰 Live Global Financial News">
+📰 國際財經即時新聞
 </h2>
 
-<div class="grid">
+<div class="refresh-row">
 
-<div class="card">
-<span class="tag">🇺🇸 Fed</span>
-
-<div class="news-title"
-data-zh="市場關注美國利率政策"
-data-en="Markets watch US interest-rate policy">
-市場關注美國利率政策
+<div class="small" id="newsStatus">
+正在取得新聞...
 </div>
 
-<div class="news-desc"
-data-zh="利率與通膨預期可能影響美元、美債、科技股及全球資金流向。"
-data-en="Rate and inflation expectations may affect the dollar, bonds, technology stocks and global capital flows.">
-利率與通膨預期可能影響美元、美債、科技股及全球資金流向。
-</div>
+<button class="refresh-btn"
+onclick="loadNews(true)"
+data-zh="🔄 更新新聞"
+data-en="🔄 Refresh News">
+🔄 更新新聞
+</button>
+
 </div>
 
-<div class="card">
-<span class="tag">🤖 AI</span>
+<div class="grid" id="newsGrid">
 
-<div class="news-title"
-data-zh="AI 基礎建設持續受到關注"
-data-en="AI infrastructure remains in focus">
-AI 基礎建設持續受到關注
-</div>
-
-<div class="news-desc"
-data-zh="半導體、AI 伺服器、資料中心與電力供應鏈仍是重要市場主題。"
-data-en="Semiconductors, AI servers, data centers and power supply chains remain major market themes.">
-半導體、AI 伺服器、資料中心與電力供應鏈仍是重要市場主題。
-</div>
-</div>
-
-<div class="card">
-<span class="tag">🌍 Global</span>
-
-<div class="news-title"
-data-zh="全球貿易與關稅政策"
-data-en="Global trade and tariff policy">
-全球貿易與關稅政策
-</div>
-
-<div class="news-desc"
-data-zh="貿易政策可能影響出口企業、製造業、汽車與科技供應鏈。"
-data-en="Trade policy may affect exporters, manufacturing, automobiles and technology supply chains.">
-貿易政策可能影響出口企業、製造業、汽車與科技供應鏈。
-</div>
+<div class="card loading">
+<span class="coin">🪙</span>
+<span data-zh=" 正在取得國際財經新聞..." data-en=" Loading global financial news...">
+ 正在取得國際財經新聞...
+</span>
 </div>
 
 </div>
+
 
 <div class="notice">
 
@@ -794,14 +820,15 @@ data-en="⚠️ Important Notice">
 <br>
 
 <span
-data-zh="目前全球市場數字、Trump Watch、市場雷達及新聞內容仍為展示資料。上市／上櫃股票搜尋會透過本站 /api/stocks 取得資料；影響主題則依產業規則整理，不代表股價預測。"
-data-en="Global market figures, Trump Watch, market radar and news are currently prototype data. Stock search uses /api/stocks, while impact topics are rule-based and are not price forecasts.">
-目前全球市場數字、Trump Watch、市場雷達及新聞內容仍為展示資料。上市／上櫃股票搜尋會透過本站 /api/stocks 取得資料；影響主題則依產業規則整理，不代表股價預測。
+data-zh="上市／上櫃股票資料由本站 /api/stocks 取得；國際新聞與 Trump Watch 由 /api/news 整理公開 RSS 標題、來源、日期與原始連結。產業影響主題目前屬規則式整理，不代表股價預測。"
+data-en="TWSE/TPEx stocks are retrieved through /api/stocks. Global news and Trump Watch use /api/news to organize public RSS titles, sources, dates and original links. Industry impact topics are rule-based and are not stock-price forecasts.">
+上市／上櫃股票資料由本站 /api/stocks 取得；國際新聞與 Trump Watch 由 /api/news 整理公開 RSS 標題、來源、日期與原始連結。產業影響主題目前屬規則式整理，不代表股價預測。
 </span>
 
 </div>
 
 </main>
+
 
 <footer>
 
@@ -817,9 +844,20 @@ data-en="This website is for research, educational and informational purposes on
 
 </footer>
 
+
 <script>
 
 let language="zh";
+
+let newsData={
+  global:[],
+  trump:[]
+};
+
+
+/* =========================
+   TIME
+========================= */
 
 function updateTime(){
 
@@ -827,14 +865,19 @@ function updateTime(){
 
   document.getElementById("updated").textContent=
     language==="zh"
-    ?"🕒 更新時間："+now.toLocaleString("zh-TW")
-    :"🕒 Updated: "+now.toLocaleString("en-US");
+    ?"🕒 網頁時間："+now.toLocaleString("zh-TW")
+    :"🕒 Page time: "+now.toLocaleString("en-US");
 
 }
 
 updateTime();
 
-function toggleLanguage(){
+
+/* =========================
+   LANGUAGE
+========================= */
+
+async function toggleLanguage(){
 
   language=
     language==="zh"
@@ -859,7 +902,14 @@ function toggleLanguage(){
 
   updateTime();
 
+  await loadNews();
+
 }
+
+
+/* =========================
+   NAV
+========================= */
 
 function goTo(id){
 
@@ -871,7 +921,10 @@ function goTo(id){
 
 }
 
-/* 產業 → 影響主題 */
+
+/* =========================
+   INDUSTRY IMPACT
+========================= */
 
 function getIndustryImpact(industry){
 
@@ -1018,7 +1071,10 @@ function getIndustryImpact(industry){
 
 }
 
-/* 股票搜尋 */
+
+/* =========================
+   STOCK SEARCH
+========================= */
 
 async function searchStock(){
 
@@ -1259,8 +1315,8 @@ async function searchStock(){
 
           ${
             language==="zh"
-            ?"💡 目前這些影響主題是依「產業分類規則」產生，並不是即時新聞判斷，也不是股價預測。下一版可以再接 Trump Watch 與國際新聞。"
-            :"💡 These topics are currently generated from industry-based rules. They are not live news analysis or stock-price forecasts."
+            ?"💡 此區目前依產業規則整理國際風險主題，不代表預測股票漲跌。"
+            :"💡 This section uses industry-based rules and does not predict stock-price movements."
           }
 
         </div>
@@ -1309,7 +1365,399 @@ async function searchStock(){
 
 }
 
-/* 避免外部資料直接插入 HTML */
+
+/* =========================
+   LOAD NEWS
+========================= */
+
+async function loadNews(force=false){
+
+  const newsGrid=
+    document.getElementById("newsGrid");
+
+  const trumpBox=
+    document.getElementById("trumpNews");
+
+  const status=
+    document.getElementById("newsStatus");
+
+  newsGrid.innerHTML=`
+    <div class="card loading">
+      <span class="coin">🪙</span>
+      ${
+        language==="zh"
+        ?" 正在取得國際財經新聞..."
+        :" Loading global financial news..."
+      }
+    </div>
+  `;
+
+  trumpBox.innerHTML=`
+    <div class="loading">
+      <span class="coin">🪙</span>
+      ${
+        language==="zh"
+        ?" 正在取得 Trump Watch..."
+        :" Loading Trump Watch..."
+      }
+    </div>
+  `;
+
+  status.textContent=
+    language==="zh"
+    ?"正在更新新聞..."
+    :"Updating news...";
+
+  try{
+
+    let url=
+      "/api/news?lang="+language;
+
+    if(force){
+      url+="&t="+Date.now();
+    }
+
+    const response=
+      await fetch(url);
+
+    if(!response.ok){
+      throw new Error("HTTP "+response.status);
+    }
+
+    const json=
+      await response.json();
+
+    if(!json.success){
+      throw new Error(json.message || "News API error");
+    }
+
+    newsData.global=
+      Array.isArray(json.global)
+      ?json.global
+      :[];
+
+    newsData.trump=
+      Array.isArray(json.trump)
+      ?json.trump
+      :[];
+
+    renderGlobalNews();
+
+    renderTrumpNews();
+
+    status.textContent=
+      language==="zh"
+      ?"✅ 新聞更新："+formatDateTime(json.updatedAt)
+      :"✅ Updated: "+formatDateTime(json.updatedAt);
+
+  }catch(error){
+
+    console.error("新聞讀取錯誤：",error);
+
+    newsGrid.innerHTML=`
+      <div class="card">
+        <div class="news-title">
+          ⚠️ ${
+            language==="zh"
+            ?"國際財經新聞暫時無法取得"
+            :"Unable to load global financial news"
+          }
+        </div>
+
+        <div class="small">
+          ${
+            language==="zh"
+            ?"請確認 /api/news 是否正常，稍後再試。"
+            :"Please check /api/news and try again later."
+          }
+        </div>
+      </div>
+    `;
+
+    trumpBox.innerHTML=`
+      <div class="small" style="margin-top:12px;">
+        ⚠️ ${
+          language==="zh"
+          ?"Trump Watch 暫時無法取得。"
+          :"Trump Watch is temporarily unavailable."
+        }
+      </div>
+    `;
+
+    status.textContent=
+      language==="zh"
+      ?"⚠️ 新聞更新失敗"
+      :"⚠️ News update failed";
+
+  }
+
+}
+
+
+/* =========================
+   GLOBAL NEWS
+========================= */
+
+function renderGlobalNews(){
+
+  const grid=
+    document.getElementById("newsGrid");
+
+  if(newsData.global.length===0){
+
+    grid.innerHTML=`
+      <div class="card">
+        <div class="news-title">
+          ${
+            language==="zh"
+            ?"目前沒有取得新聞"
+            :"No news available"
+          }
+        </div>
+      </div>
+    `;
+
+    return;
+
+  }
+
+  grid.innerHTML=
+    newsData.global
+      .slice(0,9)
+      .map(function(item){
+
+        const title=
+          escapeHTML(item.title || "");
+
+        const source=
+          escapeHTML(item.source || "News");
+
+        const date=
+          formatDateTime(item.publishedAt);
+
+        const link=
+          safeURL(item.link);
+
+        return `
+          <div class="card news-card">
+
+            <div class="news-meta">
+              <span class="tag">🌍 ${source}</span>
+            </div>
+
+            <div class="news-title">
+              ${title}
+            </div>
+
+            <div class="news-source">
+              ${
+                language==="zh"
+                ?"來源："
+                :"Source: "
+              }
+              ${source}
+            </div>
+
+            <div class="news-date">
+              🕒 ${date}
+            </div>
+
+            ${
+              link
+              ?`
+                <a
+                  class="news-link"
+                  href="${link}"
+                  target="_blank"
+                  rel="noopener noreferrer">
+
+                  ${
+                    language==="zh"
+                    ?"查看原始新聞 →"
+                    :"Read original →"
+                  }
+
+                </a>
+              `
+              :""
+            }
+
+          </div>
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =========================
+   TRUMP WATCH
+========================= */
+
+function renderTrumpNews(){
+
+  const box=
+    document.getElementById("trumpNews");
+
+  if(newsData.trump.length===0){
+
+    box.innerHTML=`
+      <div class="small" style="margin-top:15px;">
+
+        ${
+          language==="zh"
+          ?"目前沒有取得符合條件的川普財經新聞。"
+          :"No matching Trump finance news is currently available."
+        }
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+  box.innerHTML=
+    newsData.trump
+      .slice(0,4)
+      .map(function(item){
+
+        const title=
+          escapeHTML(item.title || "");
+
+        const source=
+          escapeHTML(item.source || "News");
+
+        const date=
+          formatDateTime(item.publishedAt);
+
+        const link=
+          safeURL(item.link);
+
+        return `
+
+          <div class="trump-news-card">
+
+            <div class="trump-news-title">
+              🗣️ ${title}
+            </div>
+
+            <div class="small"
+                 style="margin-top:8px;">
+
+              📰 ${source}
+              ·
+              🕒 ${date}
+
+            </div>
+
+            ${
+              link
+              ?`
+                <a
+                  class="news-link"
+                  href="${link}"
+                  target="_blank"
+                  rel="noopener noreferrer">
+
+                  ${
+                    language==="zh"
+                    ?"查看原始消息 →"
+                    :"Read original →"
+                  }
+
+                </a>
+              `
+              :""
+            }
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+function formatDateTime(value){
+
+  if(!value){
+    return "－";
+  }
+
+  const date=
+    new Date(value);
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+    return String(value);
+  }
+
+  return language==="zh"
+    ?date.toLocaleString(
+      "zh-TW",
+      {
+        year:"numeric",
+        month:"2-digit",
+        day:"2-digit",
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    )
+    :date.toLocaleString(
+      "en-US",
+      {
+        year:"numeric",
+        month:"short",
+        day:"numeric",
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+}
+
+
+/* =========================
+   SAFE URL
+========================= */
+
+function safeURL(value){
+
+  try{
+
+    const url=
+      new URL(value);
+
+    if(
+      url.protocol==="http:" ||
+      url.protocol==="https:"
+    ){
+      return escapeHTML(url.href);
+    }
+
+    return "";
+
+  }catch{
+    return "";
+  }
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
 
 function escapeHTML(value){
 
@@ -1321,6 +1769,13 @@ function escapeHTML(value){
     .replaceAll("'","&#039;");
 
 }
+
+
+/* =========================
+   START
+========================= */
+
+loadNews();
 
 </script>
 
