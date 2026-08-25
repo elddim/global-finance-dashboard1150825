@@ -27,8 +27,6 @@ body{
   min-height:100vh;
 }
 
-/* HEADER */
-
 header{
   background:linear-gradient(135deg,#38bdf8,#4f8cff,#34d399);
   color:white;
@@ -100,8 +98,6 @@ h1{
   font-size:13px;
 }
 
-/* NAV */
-
 nav{
   position:sticky;
   top:0;
@@ -134,8 +130,6 @@ nav button:hover{
   background:#dff1ff;
 }
 
-/* MAIN */
-
 main{
   max-width:1200px;
   margin:auto;
@@ -166,8 +160,6 @@ main{
   transform:translateY(-3px);
   box-shadow:0 12px 32px rgba(37,99,235,.11);
 }
-
-/* MARKET */
 
 .market-card{
   position:relative;
@@ -203,8 +195,6 @@ main{
   color:#10b981;
   margin-top:6px;
 }
-
-/* TRUMP */
 
 .trump{
   border-left:6px solid #fbbf24;
@@ -261,8 +251,6 @@ main{
   font-size:14px;
 }
 
-/* SEARCH */
-
 .search-card{
   background:linear-gradient(135deg,#eafffb,#f3fff4,#fffceb);
   border:1px solid #c9f4e5;
@@ -313,12 +301,6 @@ main{
   font-size:14px;
 }
 
-.primary-btn:hover{
-  transform:translateY(-1px);
-}
-
-/* RESULT */
-
 #stockResult{
   display:none;
   margin-top:20px;
@@ -367,8 +349,6 @@ main{
   font-size:13px;
 }
 
-/* LOADING */
-
 .loading{
   text-align:center;
   padding:20px;
@@ -389,8 +369,6 @@ main{
   }
 }
 
-/* SECTOR */
-
 .sectors{
   display:flex;
   flex-wrap:wrap;
@@ -406,8 +384,6 @@ main{
   font-size:13px;
 }
 
-/* NEWS */
-
 .news-title{
   font-size:16px;
   font-weight:900;
@@ -420,8 +396,6 @@ main{
   font-size:13px;
   line-height:1.7;
 }
-
-/* MONEY */
 
 .money{
   background:linear-gradient(135deg,#fff9d9,#edfff7);
@@ -454,8 +428,6 @@ main{
   background:linear-gradient(90deg,#34d399,#38bdf8);
 }
 
-/* DISCLAIMER */
-
 .notice{
   margin-top:30px;
   background:#fff7ed;
@@ -477,7 +449,6 @@ footer{
 }
 
 @media(max-width:650px){
-
   h1{
     font-size:27px;
   }
@@ -500,44 +471,38 @@ footer{
 <body>
 
 <header>
-
 <div class="header-inner">
 
-  <div class="top-row">
+<div class="top-row">
 
-    <div>
+<div>
 
-      <h1
-        data-zh="🌍💰 國際財經情報站"
-        data-en="🌍💰 Global Finance Intelligence">
-        🌍💰 國際財經情報站
-      </h1>
+<h1
+data-zh="🌍💰 國際財經情報站"
+data-en="🌍💰 Global Finance Intelligence">
+🌍💰 國際財經情報站
+</h1>
 
-      <div class="subtitle"
-        data-zh="全球市場 × Trump Watch × 台股搜尋 × 國際財經情報"
-        data-en="Global Markets × Trump Watch × Taiwan Stocks × Financial Intelligence">
-
-        全球市場 × Trump Watch × 台股搜尋 × 國際財經情報
-
-      </div>
-
-    </div>
-
-    <button class="lang-btn" onclick="toggleLanguage()">
-      中文 / EN
-    </button>
-
-  </div>
-
-  <div class="updated" id="updated"></div>
+<div class="subtitle"
+data-zh="全球市場 × Trump Watch × 台股搜尋 × 國際財經情報"
+data-en="Global Markets × Trump Watch × Taiwan Stocks × Financial Intelligence">
+全球市場 × Trump Watch × 台股搜尋 × 國際財經情報
+</div>
 
 </div>
 
+<button class="lang-btn" onclick="toggleLanguage()">
+中文 / EN
+</button>
+
+</div>
+
+<div class="updated" id="updated"></div>
+
+</div>
 </header>
 
-
 <nav>
-
 <div class="nav-inner">
 
 <button onclick="goTo('market')"
@@ -563,13 +528,9 @@ data-en="📰 Finance News">
 </button>
 
 </div>
-
 </nav>
 
-
 <main>
-
-<!-- MARKET -->
 
 <h2 class="section-title" id="market"
 data-zh="💵 全球市場快覽"
@@ -577,85 +538,37 @@ data-en="💵 Global Market Snapshot">
 💵 全球市場快覽
 </h2>
 
-
 <div class="grid">
 
 <div class="card market-card">
-
-<div class="market-name">
-🇺🇸 S&P 500
+<div class="market-name">🇺🇸 S&P 500</div>
+<div class="market-value">6,480.25</div>
+<div class="up">▲ +0.42%</div>
 </div>
-
-<div class="market-value">
-6,480.25
-</div>
-
-<div class="up">
-▲ +0.42%
-</div>
-
-</div>
-
 
 <div class="card market-card">
-
-<div class="market-name">
-🇺🇸 NASDAQ
+<div class="market-name">🇺🇸 NASDAQ</div>
+<div class="market-value">21,530.80</div>
+<div class="up">▲ +0.66%</div>
 </div>
-
-<div class="market-value">
-21,530.80
-</div>
-
-<div class="up">
-▲ +0.66%
-</div>
-
-</div>
-
 
 <div class="card market-card">
-
-<div class="market-name">
-🇹🇼 Taiwan
+<div class="market-name">🇹🇼 Taiwan</div>
+<div class="market-value">24,110</div>
+<div class="down">▼ -0.18%</div>
 </div>
-
-<div class="market-value">
-24,110
-</div>
-
-<div class="down">
-▼ -0.18%
-</div>
-
-</div>
-
 
 <div class="card market-card">
-
-<div class="market-name">
-₿ Bitcoin
-</div>
-
-<div class="market-value">
-$112,300
-</div>
-
-<div class="up">
-▲ +1.20%
+<div class="market-name">₿ Bitcoin</div>
+<div class="market-value">$112,300</div>
+<div class="up">▲ +1.20%</div>
 </div>
 
 </div>
-
-</div>
-
-
-<!-- TRUMP -->
 
 <h2 class="section-title" id="trump">
 🇺🇸 Trump Watch
 </h2>
-
 
 <div class="card trump">
 
@@ -675,24 +588,17 @@ data-en="Tariffs / Trade">
 
 </div>
 
-
 <div class="quote"
 data-zh="涉及關稅、製造業、貿易、科技與金融市場的重要發言將顯示於此。"
 data-en="Important statements involving tariffs, manufacturing, trade, technology and financial markets will appear here.">
-
 涉及關稅、製造業、貿易、科技與金融市場的重要發言將顯示於此。
-
 </div>
-
 
 <div class="small"
 data-zh="⚠️ 目前為版面示範。之後將串接可靠新聞來源、日期及原始連結。"
 data-en="⚠️ Currently a prototype. Reliable news sources, dates and original links will be connected later.">
-
 ⚠️ 目前為版面示範。之後將串接可靠新聞來源、日期及原始連結。
-
 </div>
-
 
 <div class="impact-grid">
 
@@ -724,37 +630,25 @@ data-en="⚠️ Currently a prototype. Reliable news sources, dates and original
 
 </div>
 
-
-<!-- STOCK SEARCH -->
-
 <h2 class="section-title" id="stock"
 data-zh="🔎 上市・上櫃股票搜尋"
 data-en="🔎 TWSE・TPEx Stock Search">
-
 🔎 上市・上櫃股票搜尋
-
 </h2>
-
 
 <div class="card search-card">
 
 <div class="search-title"
 data-zh="💰 今天想研究哪一家公司？"
 data-en="💰 Which company do you want to research?">
-
 💰 今天想研究哪一家公司？
-
 </div>
-
 
 <div class="search-description"
 data-zh="可以輸入股票代號或公司名稱，例如：2330、台積電、2454、聯發科"
 data-en="Enter a stock code or company name, e.g. 2330, TSMC, 2454, MediaTek">
-
 可以輸入股票代號或公司名稱，例如：2330、台積電、2454、聯發科
-
 </div>
-
 
 <div class="search-row">
 
@@ -770,29 +664,20 @@ class="primary-btn"
 onclick="searchStock()"
 data-zh="搜尋股票 🔎"
 data-en="Search 🔎">
-
 搜尋股票 🔎
-
 </button>
 
 </div>
-
 
 <div id="stockResult"></div>
 
 </div>
 
-
-<!-- MONEY FLOW -->
-
 <h2 class="section-title"
 data-zh="💰 今日市場雷達"
 data-en="💰 Market Radar">
-
 💰 今日市場雷達
-
 </h2>
-
 
 <div class="card money">
 
@@ -803,181 +688,120 @@ data-en="💰 Market Radar">
 <strong
 data-zh="📈 市場關注升溫"
 data-en="📈 Rising Attention">
-
 📈 市場關注升溫
-
 </strong>
 
 <p style="margin-top:13px;">🤖 AI</p>
-
-<div class="bar">
-<span style="width:88%"></span>
-</div>
+<div class="bar"><span style="width:88%"></span></div>
 
 <p>💻 半導體</p>
-
-<div class="bar">
-<span style="width:82%"></span>
-</div>
+<div class="bar"><span style="width:82%"></span></div>
 
 <p>⚡ 資料中心 / 電力</p>
-
-<div class="bar">
-<span style="width:68%"></span>
-</div>
+<div class="bar"><span style="width:68%"></span></div>
 
 </div>
-
 
 <div class="money-box">
 
 <strong
 data-zh="⚠️ 全球風險觀察"
 data-en="⚠️ Global Risk Watch">
-
 ⚠️ 全球風險觀察
-
 </strong>
 
 <p style="margin-top:13px;">🌎 關稅</p>
-
-<div class="bar">
-<span style="width:76%"></span>
-</div>
+<div class="bar"><span style="width:76%"></span></div>
 
 <p>💵 利率 / 美元</p>
-
-<div class="bar">
-<span style="width:64%"></span>
-</div>
+<div class="bar"><span style="width:64%"></span></div>
 
 <p>🛢️ 能源</p>
-
-<div class="bar">
-<span style="width:52%"></span>
-</div>
+<div class="bar"><span style="width:52%"></span></div>
 
 </div>
 
 </div>
 
 </div>
-
-
-<!-- NEWS -->
 
 <h2 class="section-title" id="news"
 data-zh="📰 國際財經焦點"
 data-en="📰 Global Financial Focus">
-
 📰 國際財經焦點
-
 </h2>
-
 
 <div class="grid">
 
 <div class="card">
-
-<span class="tag">
-🇺🇸 Fed
-</span>
+<span class="tag">🇺🇸 Fed</span>
 
 <div class="news-title"
 data-zh="市場關注美國利率政策"
 data-en="Markets watch US interest-rate policy">
-
 市場關注美國利率政策
-
 </div>
 
 <div class="news-desc"
 data-zh="利率與通膨預期可能影響美元、美債、科技股及全球資金流向。"
 data-en="Rate and inflation expectations may affect the dollar, bonds, technology stocks and global capital flows.">
-
 利率與通膨預期可能影響美元、美債、科技股及全球資金流向。
-
 </div>
-
 </div>
-
 
 <div class="card">
-
-<span class="tag">
-🤖 AI
-</span>
+<span class="tag">🤖 AI</span>
 
 <div class="news-title"
 data-zh="AI 基礎建設持續受到關注"
 data-en="AI infrastructure remains in focus">
-
 AI 基礎建設持續受到關注
-
 </div>
 
 <div class="news-desc"
 data-zh="半導體、AI 伺服器、資料中心與電力供應鏈仍是重要市場主題。"
 data-en="Semiconductors, AI servers, data centers and power supply chains remain major market themes.">
-
 半導體、AI 伺服器、資料中心與電力供應鏈仍是重要市場主題。
-
 </div>
-
 </div>
-
 
 <div class="card">
-
-<span class="tag">
-🌍 Global
-</span>
+<span class="tag">🌍 Global</span>
 
 <div class="news-title"
 data-zh="全球貿易與關稅政策"
 data-en="Global trade and tariff policy">
-
 全球貿易與關稅政策
-
 </div>
 
 <div class="news-desc"
 data-zh="貿易政策可能影響出口企業、製造業、汽車與科技供應鏈。"
 data-en="Trade policy may affect exporters, manufacturing, automobiles and technology supply chains.">
-
 貿易政策可能影響出口企業、製造業、汽車與科技供應鏈。
-
+</div>
 </div>
 
 </div>
-
-</div>
-
 
 <div class="notice">
 
 <strong
 data-zh="⚠️ 重要提醒"
 data-en="⚠️ Important Notice">
-
 ⚠️ 重要提醒
-
 </strong>
 
 <br>
 
 <span
-data-zh="目前全球市場數字、Trump Watch、市場雷達及新聞內容仍為初版展示資料。上市／上櫃股票搜尋則會透過本站 /api/stocks 取得資料。"
-data-en="Global market figures, Trump Watch, market radar and news are currently prototype data. TWSE/TPEx stock search retrieves data through this site's /api/stocks endpoint.">
-
-目前全球市場數字、Trump Watch、市場雷達及新聞內容仍為初版展示資料。上市／上櫃股票搜尋則會透過本站 /api/stocks 取得資料。
-
+data-zh="目前全球市場數字、Trump Watch、市場雷達及新聞內容仍為展示資料。上市／上櫃股票搜尋會透過本站 /api/stocks 取得資料；影響主題則依產業規則整理，不代表股價預測。"
+data-en="Global market figures, Trump Watch, market radar and news are currently prototype data. Stock search uses /api/stocks, while impact topics are rule-based and are not price forecasts.">
+目前全球市場數字、Trump Watch、市場雷達及新聞內容仍為展示資料。上市／上櫃股票搜尋會透過本站 /api/stocks 取得資料；影響主題則依產業規則整理，不代表股價預測。
 </span>
 
 </div>
 
 </main>
-
 
 <footer>
 
@@ -988,20 +812,14 @@ data-en="Global market figures, Trump Watch, market radar and news are currently
 <span
 data-zh="本網站資訊僅供研究、學習與資訊整理用途，不構成投資建議、買賣建議或任何形式之招攬。"
 data-en="This website is for research, educational and informational purposes only and does not constitute investment advice.">
-
 本網站資訊僅供研究、學習與資訊整理用途，不構成投資建議、買賣建議或任何形式之招攬。
-
 </span>
 
 </footer>
 
-
 <script>
 
 let language="zh";
-
-
-/* 時間 */
 
 function updateTime(){
 
@@ -1015,9 +833,6 @@ function updateTime(){
 }
 
 updateTime();
-
-
-/* 中英切換 */
 
 function toggleLanguage(){
 
@@ -1037,7 +852,6 @@ function toggleLanguage(){
 
     });
 
-
   document.getElementById("stockInput").placeholder=
     language==="zh"
     ?"輸入股票代號或公司名稱"
@@ -1046,9 +860,6 @@ function toggleLanguage(){
   updateTime();
 
 }
-
-
-/* 導航 */
 
 function goTo(id){
 
@@ -1060,6 +871,152 @@ function goTo(id){
 
 }
 
+/* 產業 → 影響主題 */
+
+function getIndustryImpact(industry){
+
+  const text=String(industry || "");
+
+  const rules=[
+
+    {
+      match:["半導體","電子"],
+      topics:[
+        "🤖 AI 與晶片需求",
+        "🇺🇸 美國科技與關稅政策",
+        "💵 美元匯率",
+        "🏭 全球供應鏈"
+      ],
+      sectors:[
+        "半導體",
+        "IC設計",
+        "AI伺服器",
+        "電子零組件"
+      ]
+    },
+
+    {
+      match:["金融","銀行","保險"],
+      topics:[
+        "🏦 Fed 利率政策",
+        "💵 美元匯率",
+        "📉 債券殖利率",
+        "🌍 全球景氣"
+      ],
+      sectors:[
+        "銀行",
+        "金控",
+        "保險",
+        "證券"
+      ]
+    },
+
+    {
+      match:["航運","運輸"],
+      topics:[
+        "🛢️ 國際油價",
+        "🌍 全球貿易",
+        "🇺🇸 關稅政策",
+        "🚢 運價變化"
+      ],
+      sectors:[
+        "航運",
+        "航空",
+        "物流"
+      ]
+    },
+
+    {
+      match:["電機","機械","電器"],
+      topics:[
+        "⚡ 全球電網投資",
+        "🏗️ 基礎建設",
+        "🪨 原物料價格",
+        "🇺🇸 製造業政策"
+      ],
+      sectors:[
+        "重電",
+        "電力設備",
+        "機械",
+        "基礎建設"
+      ]
+    },
+
+    {
+      match:["生技","醫療","藥"],
+      topics:[
+        "🧬 新藥與臨床進展",
+        "🏥 醫療政策",
+        "🇺🇸 FDA 審查",
+        "💰 醫療支出"
+      ],
+      sectors:[
+        "生技",
+        "製藥",
+        "醫療設備"
+      ]
+    },
+
+    {
+      match:["食品","餐飲"],
+      topics:[
+        "🌾 原物料價格",
+        "💵 匯率",
+        "🛒 消費景氣",
+        "🚚 運輸成本"
+      ],
+      sectors:[
+        "食品",
+        "零售",
+        "餐飲",
+        "民生消費"
+      ]
+    },
+
+    {
+      match:["鋼鐵","金屬"],
+      topics:[
+        "🪨 原物料價格",
+        "🇺🇸 關稅政策",
+        "🏗️ 基礎建設需求",
+        "🌍 全球製造業景氣"
+      ],
+      sectors:[
+        "鋼鐵",
+        "金屬",
+        "營建",
+        "機械"
+      ]
+    }
+
+  ];
+
+  for(const rule of rules){
+
+    if(
+      rule.match.some(function(word){
+        return text.includes(word);
+      })
+    ){
+      return rule;
+    }
+
+  }
+
+  return {
+    topics:[
+      "🌍 全球景氣",
+      "💵 匯率變化",
+      "🇺🇸 國際政策",
+      "📈 市場資金流向"
+    ],
+    sectors:[
+      "相關產業",
+      "上下游供應鏈"
+    ]
+  };
+
+}
 
 /* 股票搜尋 */
 
@@ -1074,7 +1031,6 @@ async function searchStock(){
   const result=
     document.getElementById("stockResult");
 
-
   if(!keyword){
 
     alert(
@@ -1086,7 +1042,6 @@ async function searchStock(){
     return;
 
   }
-
 
   result.style.display="block";
 
@@ -1101,7 +1056,6 @@ async function searchStock(){
     </div>
   `;
 
-
   try{
 
     const response=
@@ -1110,19 +1064,12 @@ async function searchStock(){
         encodeURIComponent(keyword)
       );
 
-
     if(!response.ok){
-
-      throw new Error(
-        "HTTP "+response.status
-      );
-
+      throw new Error("HTTP "+response.status);
     }
-
 
     const json=
       await response.json();
-
 
     if(
       !json.success ||
@@ -1159,16 +1106,10 @@ async function searchStock(){
 
     }
 
-
-    /*
-      如果搜尋名稱出現多筆，
-      優先找完全符合代號或名稱的股票。
-    */
-
     let stock=
       json.data.find(function(item){
 
-        return (
+        return(
           String(item.code).trim()===keyword ||
           String(item.name).trim()===keyword ||
           String(item.fullName).trim()===keyword
@@ -1176,13 +1117,9 @@ async function searchStock(){
 
       });
 
-
     if(!stock){
-
       stock=json.data[0];
-
     }
-
 
     const code=
       escapeHTML(stock.code || "");
@@ -1199,6 +1136,8 @@ async function searchStock(){
     const fullName=
       escapeHTML(stock.fullName || "");
 
+    const impact=
+      getIndustryImpact(stock.industry);
 
     result.innerHTML=`
 
@@ -1219,7 +1158,6 @@ async function searchStock(){
 
           </div>
 
-
           <div class="market-badge">
 
             ${
@@ -1236,7 +1174,6 @@ async function searchStock(){
 
         </div>
 
-
         <div class="stock-info">
 
           <strong>
@@ -1251,7 +1188,6 @@ async function searchStock(){
 
         </div>
 
-
         <div class="status">
 
           ${
@@ -1262,34 +1198,70 @@ async function searchStock(){
 
         </div>
 
-
         <div style="
-          margin-top:18px;
-          padding-top:16px;
+          margin-top:20px;
+          padding-top:18px;
           border-top:1px solid #edf2f7;
         ">
 
           <strong>
-
             ${
               language==="zh"
-              ?"🌍 國際事件影響分析"
-              :"🌍 Global Event Impact"
+              ?"🌍 可能影響主題"
+              :"🌍 Possible Impact Topics"
             }
-
           </strong>
 
+          <div class="impact-grid">
 
-          <div class="small"
-               style="margin-top:8px;">
-
-            ${
-              language==="zh"
-              ?"🚧 下一階段功能：我們會把這家公司與 Trump Watch、國際新聞及影響類股連結起來。"
-              :"🚧 Next step: connect this company with Trump Watch, global news and affected sectors."
-            }
+            ${impact.topics.map(function(topic){
+              return `
+                <div class="impact-box">
+                  ${escapeHTML(topic)}
+                </div>
+              `;
+            }).join("")}
 
           </div>
+
+        </div>
+
+        <div style="margin-top:20px;">
+
+          <strong>
+            ${
+              language==="zh"
+              ?"🏭 可能相關類股"
+              :"🏭 Related Sectors"
+            }
+          </strong>
+
+          <div class="sectors">
+
+            ${impact.sectors.map(function(sector){
+              return `
+                <div class="sector">
+                  ${escapeHTML(sector)}
+                </div>
+              `;
+            }).join("")}
+
+          </div>
+
+        </div>
+
+        <div class="small"
+             style="
+               margin-top:18px;
+               padding-top:15px;
+               border-top:1px dashed #dbe3ec;
+             ">
+
+          ${
+            language==="zh"
+            ?"💡 目前這些影響主題是依「產業分類規則」產生，並不是即時新聞判斷，也不是股價預測。下一版可以再接 Trump Watch 與國際新聞。"
+            :"💡 These topics are currently generated from industry-based rules. They are not live news analysis or stock-price forecasts."
+          }
 
         </div>
 
@@ -1297,20 +1269,14 @@ async function searchStock(){
 
     `;
 
-
     result.scrollIntoView({
       behavior:"smooth",
       block:"center"
     });
 
-
   }catch(error){
 
-    console.error(
-      "股票搜尋錯誤：",
-      error
-    );
-
+    console.error("股票搜尋錯誤：",error);
 
     result.innerHTML=`
 
@@ -1324,14 +1290,13 @@ async function searchStock(){
           }
         </div>
 
-
         <div class="small"
              style="margin-top:10px;">
 
           ${
             language==="zh"
-            ?"請稍後再試。如果 /api/stocks 可以正常顯示資料，請檢查 Vercel 是否已部署最新的 index.html。"
-            :"Please try again later. If /api/stocks works, check whether Vercel has deployed the latest index.html."
+            ?"請稍後再試，並確認 /api/stocks 是否能正常取得資料。"
+            :"Please try again later and check whether /api/stocks is working."
           }
 
         </div>
@@ -1344,8 +1309,7 @@ async function searchStock(){
 
 }
 
-
-/* 防止 API 文字直接插入 HTML */
+/* 避免外部資料直接插入 HTML */
 
 function escapeHTML(value){
 
